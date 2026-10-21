@@ -1,7 +1,6 @@
-
- // ============================================
- // SERVIDOR BACKEND DE ARTESANA
- // ============================================
+// ============================================
+// SERVIDOR BACKEND DE ARTESANA
+// ============================================
 
 require("dotenv").config();
 
@@ -20,13 +19,22 @@ app.use(express.json());
 // CONFIGURACIÓN DE POSTGRESQL
 // ============================================
 
-const pool = new Pool({
-    user: process.env.DB_USER || "postgres",
-    host: process.env.DB_HOST || "localhost",
-    database: process.env.DB_NAME || "artesana",
-    password: process.env.DB_PASSWORD,
-    port: Number(process.env.DB_PORT || 5432)
-});
+// Si existe DATABASE_URL, usamos Neon.
+// Si no existe, usamos la base de datos local.
+const pool = process.env.DATABASE_URL
+    ? new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: true
+        }
+    })
+    : new Pool({
+        user: process.env.DB_USER || "postgres",
+        host: process.env.DB_HOST || "localhost",
+        database: process.env.DB_NAME || "artesana",
+        password: process.env.DB_PASSWORD,
+        port: Number(process.env.DB_PORT || 5432)
+    });
 
 // ============================================
 // MIDDLEWARE PARA VERIFICAR EL TOKEN JWT
@@ -69,7 +77,7 @@ pool.query("SELECT NOW()", (error, resultado) => {
     if (error) {
         console.error(
             "Error al conectar con PostgreSQL:",
-            error.message
+            error
         );
         return;
     }
