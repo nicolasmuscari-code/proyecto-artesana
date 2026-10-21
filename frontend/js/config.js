@@ -5,6 +5,5 @@
    Configuración de la conexión con el Backend
 ===================================================== */
 
-// Dirección base del Backend.
-// Por ahora trabajamos en el entorno local.
-const API_BASE_URL = "http://localhost:3000";
+// Dirección pública del Backend desplegado en Render.
+const API_BASE_URL = "https://proyecto-artesana.onrender.com";
