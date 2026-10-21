@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <!-- Configuración de caracteres utilizados por la página -->
+    <meta charset="utf-8">
+
+    <!-- Permite que la página se adapte correctamente a distintos tamaños de pantalla -->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <!-- Título que aparece en la pestaña del navegador -->
+    <title>Artesana</title>
+
+    <!-- Incorporamos Bootstrap para utilizar sus estilos y clases -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+
+/* Agrega una sombra para mejorar visualmente las tarjetas */
+.card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+}
+
+/* Mantiene todas las imágenes de las categorías con el mismo tamaño */
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+}
+
+        /* Imagen principal de Artesana */
+.imagen-principal {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+    
+
+        /* Presentación principal de Artesana */
+.encabezado-artesana {
+    padding: 40px 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+        /* Mantiene la barra de navegación visible al desplazarse por la página */
+.navbar-artesana {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Efecto visual para los enlaces del navbar */
+.navbar-artesana .nav-link {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* El enlace se eleva levemente al pasar el mouse */
+.navbar-artesana .nav-link:hover {
+    transform: translateY(-2px);
+}
+
+/* Color del icono de WhatsApp */
+.icon-whatsapp {
+    color: #25D366;
+}
+
+/* Color del icono de Instagram */
+.icon-instagram {
+    color: #E4405F;
+}
+
+    </style>
+
+</head>
+
+
+<body class="d-flex flex-column min-vh-100">
+
+
+   <!-- Barra de navegación principal del sitio -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-artesana">
+
+    <div class="container">
+
+        <!-- Nombre de Artesana y enlace para volver al inicio -->
+        <a class="navbar-brand" href="index.html">
+            Artesana
+        </a>
+
+
+        <!-- Botón hamburguesa para pantallas pequeñas -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarArtesana"
+            aria-controls="navbarArtesana"
+            aria-expanded="false"
+            aria-label="Abrir menú">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <!-- Menú de navegación -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
+
+            <div class="navbar-nav">
+
+                <a class="nav-link" href="velas.html">
+                    Velas
+                </a>
+
+                <a class="nav-link" href="mandalas.html">
+                    Mandalas
+                </a>
+
+                <a class="nav-link" href="iluminacion.html">
+                    Iluminación
+                </a>
+
+                <a class="nav-link" href="almohadones.html">
+                    Almohadones
+                </a>
+
+                <!-- Enlace al carrito y contador de productos -->
+                <a class="nav-link" href="carrito.html">
+                    🛒 Carrito
+                    (<span id="contador-carrito">0</span>)
+                </a>
+
+                <!-- Enlace a la página de inicio de sesión -->
+                <a class="nav-link" href="login.html" id="nav-login">
+                    🔐 Ingresar
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+    <!-- Encabezado principal de la página -->
+    <header class="container text-center mt-5 encabezado-artesana">
+
+        <h1 class="display-1 fw-bold">
+            Artesana
+        </h1>
+
+        <!-- Descripción principal del emprendimiento -->
+        <p class="lead mt-3">
+            Velas, Mandalas, Iluminación y mucho más...
+        </p>
+
+        <p class="mt-4">
+            Productos artesanales realizados con amor,
+            dedicación y atención en cada detalle.
+        </p>
+
+        <!-- Imagen principal del sitio -->
+        <img src="imagenes/velas/Vela_Soja_Bocha_Vidrio.jpg"
+     class="img-fluid rounded mt-4 imagen-principal"
+     alt="Vela artesanal de soja">
+
+    </header>
+
+
+    <!-- Contenido principal de la página -->
+    <main class="container py-5 flex-grow-1">
+
+
+        <!-- Sección que presenta brevemente el emprendimiento -->
+        <section class="text-center mb-5">
+
+            <h2>
+                Conocé Artesana
+            </h2>
+
+            <p class="lead">
+                En Artesana creamos productos artesanales pensados
+                para decorar, regalar y darle un toque especial a cada espacio.
+            </p>
+
+            <p>
+                Cada producto es realizado con dedicación y atención en cada detalle.
+            </p>
+
+        </section>
+
+
+        <!-- Sección que muestra algunas características de Artesana -->
+        <section class="text-center mb-5">
+
+            <h2 class="mb-4">
+                ¿Por qué elegir Artesana?
+            </h2>
+
+            <div class="row g-4">
+
+                <div class="col-12 col-md-4">
+
+                    <h3>
+                        ❤️ Hecho con dedicación
+                    </h3>
+
+                    <p>
+                        Cada producto es realizado artesanalmente,
+                        cuidando cada detalle.
+                    </p>
+
+                </div>
+
+
+                <div class="col-12 col-md-4">
+
+                    <h3>
+                        🎨 Diseños artesanales
+                    </h3>
+
+                    <p>
+                        Productos con diseños pensados para darle
+                        un toque especial a cada espacio.
+                    </p>
+
+                </div>
+
+
+                <div class="col-12 col-md-4">
+
+                    <h3>
+                        🎁 Para regalar y decorar
+                    </h3>
+
+                    <p>
+                        Opciones artesanales ideales para regalar
+                        o decorar tu hogar.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Sección principal del catálogo -->
+        <section>
+
+            <h2 class="text-center mb-4">
+                Explorá nuestro catálogo
+            </h2>
+
+            <div class="row g-4">
+
+
+                <!-- Tarjeta correspondiente a la categoría Velas -->
+                <div class="col-12 col-md-6 col-lg-3">
+
+                    <div class="card h-100 text-center">
+
+                        <img src="imagenes/velas/Vela_Soja_Bocha_Vidrio.jpg"
+                             class="card-img-top"
+                             alt="Velas artesanales">
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                🕯️ Velas
+                            </h3>
+
+                            <p class="card-text">
+                                Velas artesanales para crear ambientes especiales.
+                            </p>
+
+                            <!-- Enlace para ingresar a la categoría Velas -->
+                            <a href="velas.html" class="btn btn-primary">
+                                Ver velas
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Tarjeta correspondiente a la categoría Mandalas -->
+                <div class="col-12 col-md-6 col-lg-3">
+
+                    <div class="card h-100 text-center">
+
+                        <img src="imagenes/Mandalas/Mandalitas.png"
+                             class="card-img-top"
+                             alt="Mandala artesanal">
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                🎨 Mandalas
+                            </h3>
+
+                            <p class="card-text">
+                                Diseños artesanales para decorar tus espacios.
+                            </p>
+
+                            <!-- Enlace para ingresar a la categoría Mandalas -->
+                            <a href="mandalas.html" class="btn btn-primary">
+                                Ver mandalas
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Tarjeta correspondiente a la categoría Iluminación -->
+                <div class="col-12 col-md-6 col-lg-3">
+
+                    <div class="card h-100 text-center">
+
+                        <img src="imagenes/Iluminacion/Velador_Bob_Esponja.jpg"
+                             class="card-img-top"
+                             alt="Velador infantil artesanal">
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                💡 Iluminación
+                            </h3>
+
+                            <p class="card-text">
+                                Veladores infantiles, colgantes y mucho más.
+                            </p>
+
+                            <!-- Enlace para ingresar a la categoría Iluminación -->
+                            <a href="iluminacion.html" class="btn btn-primary">
+                                Ver iluminación
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Tarjeta correspondiente a la categoría Almohadones -->
+                <div class="col-12 col-md-6 col-lg-3">
+
+                    <div class="card h-100 text-center">
+
+                        <img src="imagenes/Almohadones/Almohadon_Buho.jpg"
+                             class="card-img-top"
+                             alt="Almohadón artesanal">
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                🛋️ Almohadones
+                            </h3>
+
+                            <p class="card-text">
+                                Almohadones con diseños artesanales y mas.
+                            </p>
+
+                            <!-- Enlace para ingresar a la categoría Almohadones -->
+                            <a href="almohadones.html" class="btn btn-primary">
+                                Ver almohadones
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Sección que invita al usuario a realizar un pedido -->
+        <section class="text-center py-5">
+
+            <h2>
+                📱 ¿Querés hacer un pedido?
+            </h2>
+
+            <p class="lead mt-3">
+                Explorá nuestro catálogo y encontrá el producto
+                que estás buscando.
+            </p>
+
+            <p>
+                Agregá los productos
+                al carrito y realizá tu pedido por WhatsApp.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Pie de página con información general del emprendimiento -->
+    <footer class="py-4 mt-5 border-top">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+
+                <!-- Información de Artesana -->
+                <div class="col-12 col-md-4 text-center text-md-start">
+
+                    <h5>
+                        Artesana
+                    </h5>
+
+                    <p class="mb-0">
+                        Velas, Mandalas, Iluminación y mucho más.
+                    </p>
+
+                </div>
+
+
+<!-- Redes sociales y medios de contacto -->
+<div class="col-12 col-md-4 text-center my-3 my-md-0">
+
+    <!-- Enlace directo a WhatsApp para consultas -->
+    <a 
+        href="https://wa.me/5491165076525"
+        target="_blank"
+        class="text-decoration-none me-3">
+
+       <i class="bi bi-whatsapp icon-whatsapp"></i>
+WhatsApp
+
+    </a>
+
+    <!-- Enlace al perfil de Instagram de Artesana -->
+    <a 
+        href="https://www.instagram.com/arte_sana_aromas/"
+        target="_blank"
+        class="text-decoration-none">
+
+        <i class="bi bi-instagram icon-instagram"></i>
+Instagram
+
+    </a>
+
+</div>
+
+
+                <!-- Derechos y autor del desarrollo -->
+                <div class="col-12 col-md-4 text-center text-md-end">
+
+                    <p class="mb-1">
+                        © 2026 Artesana — Todos los derechos reservados.
+                    </p>
+
+                    <p class="mb-0">
+
+                        Desarrollado por
+
+                        <a href="mailto:nicolasmuscari5@gmail.com">
+                            Nicolás Muscari
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Configuración de la conexión con el Backend -->
+<script src="js/config.js"></script>
+
+<!-- JavaScript encargado de cargar los productos -->
+<script src="js/productos.js"></script>
+
+<!-- JavaScript encargado de las funciones del carrito -->
+<script src="js/carrito.js"></script>
+
+<!-- JavaScript encargado de controlar la sesión del usuario -->
+<script src="js/sesion.js"></script>
+
+
+</body>
+
+</html>
+
+
+

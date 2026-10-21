@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <!-- Configuración de caracteres utilizados por la página -->
+    <meta charset="utf-8">
+
+    <!-- Permite que la página se adapte correctamente a distintos tamaños de pantalla -->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <!-- Título que aparece en la pestaña del navegador -->
+    <title>Artesana - Almohadones</title>
+
+    <!-- Incorporamos Bootstrap para utilizar sus estilos y clases -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<style>
+
+    /* Define el tamaño y comportamiento de las imágenes de los productos */
+    .card-img-top {
+        height: 250px;
+        object-fit: contain;
+        cursor: zoom-in;
+        transition: transform 0.3s ease;
+    }
+
+    /* Amplía suavemente la imagen cuando el usuario pasa el mouse */
+    .card-img-top:hover {
+        transform: scale(1.05);
+    }
+
+    /* Estilos visuales de las tarjetas de productos */
+    .card {
+        height: 100%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    /* Mantiene la barra de navegación visible al desplazarse por la página */
+    .navbar-artesana {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    /* Efecto visual para los enlaces del navbar */
+    .navbar-artesana .nav-link {
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    /* El enlace se eleva levemente al pasar el mouse */
+    .navbar-artesana .nav-link:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Efecto visual para los botones al pasar el mouse */
+    .btn-primary {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* El botón se eleva levemente cuando el usuario pasa el mouse */
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Color del icono de WhatsApp */
+.icon-whatsapp {
+    color: #25D366;
+}
+
+/* Color del icono de Instagram */
+.icon-instagram {
+    color: #E4405F;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Barra de navegación principal del sitio -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-artesana">
+
+    <div class="container">
+
+        <!-- Nombre de Artesana y enlace para volver al inicio -->
+        <a class="navbar-brand" href="index.html">
+            Artesana
+        </a>
+
+
+        <!-- Botón hamburguesa para pantallas pequeñas -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarArtesana"
+            aria-controls="navbarArtesana"
+            aria-expanded="false"
+            aria-label="Abrir menú">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <!-- Menú de navegación -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
+
+            <div class="navbar-nav">
+
+                <a class="nav-link" href="velas.html">
+                    Velas
+                </a>
+
+                <a class="nav-link" href="mandalas.html">
+                    Mandalas
+                </a>
+
+                <a class="nav-link" href="iluminacion.html">
+                    Iluminación
+                </a>
+
+                <a class="nav-link" href="almohadones.html">
+                    Almohadones
+                </a>
+
+                <!-- Enlace al carrito y contador de productos -->
+                <a class="nav-link" href="carrito.html">
+                    🛒 Carrito
+                    (<span id="contador-carrito">0</span>)
+                </a>
+
+                <!-- Enlace a la página de inicio de sesión -->
+                <a class="nav-link" href="login.html" id="nav-login">
+                    🔐 Ingresar
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+    <!-- Contenido principal de la categoría Almohadones -->
+    <main class="container py-5">
+
+
+        <!-- Título y descripción de la categoría -->
+        <h1 class="text-center mb-3">
+            🛋️ Almohadones
+        </h1>
+
+        <p class="text-center text-muted mb-5">
+            Almohadones con Diseños
+        </p>
+
+
+        <!-- Contenedor donde se organizan las tarjetas de productos -->
+        <body data-categoria="Almohadones">
+
+
+           
+<!-- Contenedor donde se mostrarán los productos desde el Backend -->
+<div class="row g-4" id="contenedor-productos">
+</div>
+
+    </main>
+
+
+    <!-- Pie de página con información general del emprendimiento -->
+    <footer class="py-4 mt-5 border-top">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <!-- Información general de Artesana -->
+                <div class="col-12 col-md-4 text-center text-md-start">
+
+                    <h5>
+                        Artesana
+                    </h5>
+
+                    <p class="mb-0">
+                        Velas, Mandalas, Iluminación y mucho más.
+                    </p>
+
+                </div>
+
+
+              <!-- Redes sociales y medios de contacto -->
+<div class="col-12 col-md-4 text-center my-3 my-md-0">
+
+    <!-- Enlace directo a WhatsApp para consultas -->
+    <a 
+        href="https://wa.me/5491165076525"
+        target="_blank"
+        class="text-decoration-none me-3">
+
+        <i class="bi bi-whatsapp icon-whatsapp"></i>
+WhatsApp
+
+    </a>
+
+    <!-- Enlace al perfil de Instagram de Artesana -->
+    <a 
+        href="https://www.instagram.com/arte_sana_aromas/"
+        target="_blank"
+        class="text-decoration-none">
+
+        <i class="bi bi-instagram icon-instagram"></i>
+Instagram
+
+    </a>
+
+</div>
+
+
+                <!-- Derechos y autor del desarrollo -->
+                <div class="col-12 col-md-4 text-center text-md-end">
+
+                    <p class="mb-1">
+                        © 2026 Artesana — Todos los derechos reservados.
+                    </p>
+
+                    <p class="mb-0">
+
+                        Desarrollado por
+
+                        <!-- Enlace para enviar un correo electrónico -->
+                        <a href="mailto:nicolasmuscari5@gmail.com">
+                            Nicolás Muscari
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+  <!-- Ventana modal para visualizar la imagen ampliada -->
+    <div class="modal fade" id="modalImagen" tabindex="-1" aria-labelledby="modalImagenLabel" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+
+            <div class="modal-content">
+
+                <!-- Encabezado de la ventana -->
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="modalImagenLabel">
+                        Imagen del producto
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Cerrar">
+                    </button>
+
+                </div>
+
+                <!-- Imagen ampliada -->
+                <div class="modal-body text-center">
+
+                    <img
+                        id="imagenAmpliada"
+                        src=""
+                        alt=""
+                        class="img-fluid rounded">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+   
+<!-- Bootstrap JavaScript: permite utilizar componentes como la ventana modal -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Configuración de la dirección del Backend -->
+<script src="js/config.js"></script>
+
+<!-- Carga de los productos desde el Backend -->
+<script src="js/productos.js"></script>
+
+<!-- Funciones del carrito y ampliación de imágenes -->
+<script src="js/carrito.js"></script>
+
+<!-- Control de la sesión del usuario -->
+<script src="js/sesion.js"></script>
+
+
+</body>
+
+</html>
