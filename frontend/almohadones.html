@@ -1,234 +1,479 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Configuración de caracteres utilizados por la página -->
-    <meta charset="utf-8">
-
-    <!-- Permite que la página se adapte correctamente a distintos tamaños de pantalla -->
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <!-- Título que aparece en la pestaña del navegador -->
     <title>Artesana - Almohadones</title>
 
-    <!-- Incorporamos Bootstrap para utilizar sus estilos y clases -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-<style>
 
-    /* Define el tamaño y comportamiento de las imágenes de los productos */
-    .card-img-top {
-        height: 250px;
-        object-fit: contain;
-        cursor: zoom-in;
-        transition: transform 0.3s ease;
-    }
+    <style>
+        :root {
+            --color-fondo: #f8f3eb;
+            --color-crema: #fffaf3;
+            --color-principal: #a65f45;
+            --color-principal-hover: #874a35;
+            --color-secundario: #d9a58b;
+            --color-texto: #49372f;
+            --color-suave: #8b776d;
+            --color-borde: #eadbce;
+        }
 
-    /* Amplía suavemente la imagen cuando el usuario pasa el mouse */
-    .card-img-top:hover {
-        transform: scale(1.05);
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    /* Estilos visuales de las tarjetas de productos */
-    .card {
-        height: 100%;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
-        border-radius: 10px;
-        overflow: hidden;
-    }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: "Segoe UI", sans-serif;
+        }
 
-    /* Mantiene la barra de navegación visible al desplazarse por la página */
-    .navbar-artesana {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
+        /* FONDO GENERAL RELACIONADO CON ALMOHADONES */
 
-    /* Efecto visual para los enlaces del navbar */
-    .navbar-artesana .nav-link {
-        transition: transform 0.2s ease, color 0.2s ease;
-    }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background:
+                linear-gradient(
+                    rgba(248, 243, 235, 0.88),
+                    rgba(248, 243, 235, 0.88)
+                ),
+                url("imagenes/Almohadones/Almohadon_Buenos_Aires.jpg") center / cover no-repeat;
+        }
 
-    /* El enlace se eleva levemente al pasar el mouse */
-    .navbar-artesana .nav-link:hover {
-        transform: translateY(-2px);
-    }
+        main {
+            flex: 1;
+        }
 
-    /* Efecto visual para los botones al pasar el mouse */
-    .btn-primary {
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+        /* BARRA DE NAVEGACIÓN */
 
-    /* El botón se eleva levemente cuando el usuario pasa el mouse */
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
+        .navbar-artesana {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(255, 250, 243, 0.97);
+            border-bottom: 1px solid var(--color-borde);
+            box-shadow: 0 3px 15px rgba(73, 55, 47, 0.06);
+        }
 
-    /* Color del icono de WhatsApp */
-.icon-whatsapp {
-    color: #25D366;
-}
+        .navbar-artesana .navbar-brand {
+            color: var(--color-principal);
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
 
-/* Color del icono de Instagram */
-.icon-instagram {
-    color: #E4405F;
-}
+        .navbar-artesana .nav-link {
+            color: var(--color-texto);
+            font-weight: 500;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
 
-</style>
+        .navbar-artesana .nav-link:hover {
+            color: var(--color-principal);
+            transform: translateY(-2px);
+        }
 
+        .navbar-toggler {
+            border-color: var(--color-secundario);
+        }
+
+        /* PRESENTACIÓN DE ALMOHADONES */
+
+        .categoria-hero {
+            position: relative;
+            min-height: 310px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 22px;
+            margin-top: 30px;
+            margin-bottom: 45px;
+            padding: 45px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(45, 32, 25, 0.55),
+                    rgba(45, 32, 25, 0.62)
+                ),
+                url("imagenes/Almohadones/Almohadon_Buenos_Aires.jpg") center / cover no-repeat;
+
+            box-shadow: 0 12px 30px rgba(73, 55, 47, 0.15);
+        }
+
+        .categoria-hero-contenido {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 700px;
+        }
+
+        .categoria-hero-icono {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            color: #f5d6a7;
+        }
+
+        .categoria-hero h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .categoria-hero p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        /* TÍTULO DE PRODUCTOS */
+
+        .productos-titulo {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .productos-titulo h2 {
+            color: var(--color-texto);
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .productos-titulo p {
+            display: inline-block;
+            color: var(--color-texto);
+            background-color: rgba(255, 250, 243, 0.92);
+            font-weight: 600;
+            padding: 9px 18px;
+            border-radius: 20px;
+            margin-top: 2px;
+            box-shadow: 0 2px 8px rgba(73, 55, 47, 0.06);
+        }
+
+        .titulo-decorativo {
+            width: 75px;
+            height: 3px;
+            margin: 15px auto;
+            background-color: var(--color-principal);
+            border-radius: 5px;
+        }
+
+        /* TARJETAS DE PRODUCTOS */
+
+        #contenedor-productos > div {
+            display: flex;
+        }
+
+        #contenedor-productos .card {
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--color-borde);
+            border-radius: 18px;
+            overflow: hidden;
+            background-color: var(--color-crema);
+            box-shadow: 0 7px 20px rgba(73, 55, 47, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        #contenedor-productos .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 30px rgba(73, 55, 47, 0.15);
+        }
+
+        .card-img-top {
+            height: 260px;
+            width: 100%;
+            object-fit: contain;
+            padding: 15px;
+            cursor: zoom-in;
+            background-color: #fffdf9;
+            transition: transform 0.3s ease;
+        }
+
+        .card-img-top:hover {
+            transform: scale(1.04);
+        }
+
+        #contenedor-productos .card-body {
+            padding: 22px;
+        }
+
+        #contenedor-productos .card-title {
+            color: var(--color-texto);
+            font-weight: 750;
+            font-size: 1.15rem;
+        }
+
+        #contenedor-productos .card-text {
+            color: var(--color-suave);
+        }
+
+        #contenedor-productos .card-text:last-of-type {
+            color: var(--color-principal);
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        /* BOTÓN AGREGAR AL CARRITO */
+
+        .btn-primary {
+            background-color: var(--color-principal);
+            border: none;
+            border-radius: 10px;
+            padding: 11px 15px;
+            font-weight: 650;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-principal-hover);
+            transform: translateY(-2px);
+        }
+
+        /* MODAL DE IMAGEN AMPLIADA */
+
+        .modal-content {
+            background-color: var(--color-crema);
+            border: 1px solid var(--color-borde);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            color: var(--color-texto);
+            border-bottom: 1px solid var(--color-borde);
+        }
+
+        #imagenAmpliada {
+            max-height: 75vh;
+            object-fit: contain;
+        }
+
+        /* PIE DE PÁGINA */
+
+        .footer-artesana {
+            background-color: #49372f;
+            color: #fffaf3;
+            padding: 35px 0;
+            margin-top: 60px;
+        }
+
+        .footer-artesana h5 {
+            font-weight: 800;
+        }
+
+        .footer-artesana p {
+            color: #e6d7ca;
+        }
+
+        .footer-artesana a {
+            color: #fffaf3;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-artesana a:hover {
+            color: #e9b99e;
+        }
+
+        .icon-whatsapp {
+            color: #25D366;
+        }
+
+        .icon-instagram {
+            color: #f18a9c;
+        }
+
+        /* ADAPTACIÓN A CELULARES Y TABLETS */
+
+        @media (max-width: 768px) {
+            .categoria-hero {
+                min-height: 260px;
+                margin-top: 22px;
+                margin-bottom: 40px;
+                border-radius: 16px;
+            }
+
+            .categoria-hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .categoria-hero p {
+                font-size: 1rem;
+            }
+
+            .card-img-top {
+                height: 230px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .productos-titulo h2 {
+                font-size: 1.7rem;
+            }
+
+            .productos-titulo p {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+
+            .footer-artesana {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
+<body data-categoria="Almohadones">
 
-<body>
+    <!-- BARRA DE NAVEGACIÓN -->
 
+    <nav class="navbar navbar-expand-lg navbar-artesana">
+        <div class="container">
 
-    <!-- Barra de navegación principal del sitio -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-artesana">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-flower1"></i> Artesana
+            </a>
 
-    <div class="container">
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarArtesana"
+                aria-controls="navbarArtesana"
+                aria-expanded="false"
+                aria-label="Abrir menú">
 
-        <!-- Nombre de Artesana y enlace para volver al inicio -->
-        <a class="navbar-brand" href="index.html">
-            Artesana
-        </a>
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
+                <div class="navbar-nav">
 
-        <!-- Botón hamburguesa para pantallas pequeñas -->
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarArtesana"
-            aria-controls="navbarArtesana"
-            aria-expanded="false"
-            aria-label="Abrir menú">
+                    <a class="nav-link" href="velas.html">Velas</a>
+                    <a class="nav-link" href="mandalas.html">Mandalas</a>
+                    <a class="nav-link" href="iluminacion.html">Iluminación</a>
+                    <a class="nav-link" href="almohadones.html">Almohadones</a>
 
-            <span class="navbar-toggler-icon"></span>
+                    <a class="nav-link" href="carrito.html">
+                        <i class="bi bi-cart3"></i>
+                        Carrito (<span id="contador-carrito">0</span>)
+                    </a>
 
-        </button>
+                    <a class="nav-link" href="login.html" id="nav-login">
+                        <i class="bi bi-person-circle"></i>
+                        Ingresar
+                    </a>
 
+                </div>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Menú de navegación -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
+    <!-- CONTENIDO PRINCIPAL -->
 
-            <div class="navbar-nav">
+    <main class="container">
 
-                <a class="nav-link" href="velas.html">
-                    Velas
-                </a>
+        <!-- PRESENTACIÓN DE LA CATEGORÍA -->
 
-                <a class="nav-link" href="mandalas.html">
-                    Mandalas
-                </a>
+        <section class="categoria-hero">
+            <div class="categoria-hero-contenido">
 
-                <a class="nav-link" href="iluminacion.html">
-                    Iluminación
-                </a>
+                <div class="categoria-hero-icono">
+                    <i class="bi bi-house-heart"></i>
+                </div>
 
-                <a class="nav-link" href="almohadones.html">
-                    Almohadones
-                </a>
+                <h1>Almohadones artesanales</h1>
 
-                <!-- Enlace al carrito y contador de productos -->
-                <a class="nav-link" href="carrito.html">
-                    🛒 Carrito
-                    (<span id="contador-carrito">0</span>)
-                </a>
-
-                <!-- Enlace a la página de inicio de sesión -->
-                <a class="nav-link" href="login.html" id="nav-login">
-                    🔐 Ingresar
-                </a>
+                <p>
+                    Diseños que llenan de calidez tus espacios,
+                    combinando comodidad, color y detalles especiales
+                    para cada rincón de tu hogar.
+                </p>
 
             </div>
+        </section>
 
+        <!-- TÍTULO DEL CATÁLOGO -->
+
+        <section class="productos-titulo">
+
+            <h2>Descubrí nuestra colección</h2>
+
+            <div class="titulo-decorativo"></div>
+
+            <p>
+                Almohadones con diseños únicos para darle personalidad a tu hogar.
+            </p>
+
+        </section>
+
+        <!-- PRODUCTOS CARGADOS DESDE EL BACKEND -->
+
+        <div class="row g-4" id="contenedor-productos">
+            <!-- Los productos se cargarán dinámicamente desde PostgreSQL -->
         </div>
-
-    </div>
-
-</nav>
-
-
-    <!-- Contenido principal de la categoría Almohadones -->
-    <main class="container py-5">
-
-
-        <!-- Título y descripción de la categoría -->
-        <h1 class="text-center mb-3">
-            🛋️ Almohadones
-        </h1>
-
-        <p class="text-center text-muted mb-5">
-            Almohadones con Diseños
-        </p>
-
-
-        <!-- Contenedor donde se organizan las tarjetas de productos -->
-        <body data-categoria="Almohadones">
-
-
-           
-<!-- Contenedor donde se mostrarán los productos desde el Backend -->
-<div class="row g-4" id="contenedor-productos">
-</div>
 
     </main>
 
+    <!-- PIE DE PÁGINA -->
 
-    <!-- Pie de página con información general del emprendimiento -->
-    <footer class="py-4 mt-5 border-top">
-
+    <footer class="footer-artesana">
         <div class="container">
 
             <div class="row align-items-center">
 
-                <!-- Información general de Artesana -->
                 <div class="col-12 col-md-4 text-center text-md-start">
-
                     <h5>
-                        Artesana
+                        <i class="bi bi-flower1"></i> Artesana
                     </h5>
 
                     <p class="mb-0">
                         Velas, Mandalas, Iluminación y mucho más.
                     </p>
+                </div>
+
+                <div class="col-12 col-md-4 text-center my-3 my-md-0">
+
+                    <a
+                        href="https://wa.me/5491165076525"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="me-3">
+
+                        <i class="bi bi-whatsapp icon-whatsapp"></i>
+                        WhatsApp
+                    </a>
+
+                    <a
+                        href="https://www.instagram.com/arte_sana_aromas/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        <i class="bi bi-instagram icon-instagram"></i>
+                        Instagram
+                    </a>
 
                 </div>
 
-
-              <!-- Redes sociales y medios de contacto -->
-<div class="col-12 col-md-4 text-center my-3 my-md-0">
-
-    <!-- Enlace directo a WhatsApp para consultas -->
-    <a 
-        href="https://wa.me/5491165076525"
-        target="_blank"
-        class="text-decoration-none me-3">
-
-        <i class="bi bi-whatsapp icon-whatsapp"></i>
-WhatsApp
-
-    </a>
-
-    <!-- Enlace al perfil de Instagram de Artesana -->
-    <a 
-        href="https://www.instagram.com/arte_sana_aromas/"
-        target="_blank"
-        class="text-decoration-none">
-
-        <i class="bi bi-instagram icon-instagram"></i>
-Instagram
-
-    </a>
-
-</div>
-
-
-                <!-- Derechos y autor del desarrollo -->
                 <div class="col-12 col-md-4 text-center text-md-end">
 
                     <p class="mb-1">
@@ -236,35 +481,31 @@ Instagram
                     </p>
 
                     <p class="mb-0">
-
                         Desarrollado por
-
-                        <!-- Enlace para enviar un correo electrónico -->
                         <a href="mailto:nicolasmuscari5@gmail.com">
                             Nicolás Muscari
                         </a>
-
                     </p>
 
                 </div>
 
             </div>
-
         </div>
-
     </footer>
 
+    <!-- MODAL PARA AMPLIAR IMÁGENES -->
 
-  <!-- Ventana modal para visualizar la imagen ampliada -->
-    <div class="modal fade" id="modalImagen" tabindex="-1" aria-labelledby="modalImagenLabel" aria-hidden="true">
+    <div
+        class="modal fade"
+        id="modalImagen"
+        tabindex="-1"
+        aria-labelledby="modalImagenLabel"
+        aria-hidden="true">
 
         <div class="modal-dialog modal-dialog-centered modal-lg">
-
             <div class="modal-content">
 
-                <!-- Encabezado de la ventana -->
                 <div class="modal-header">
-
                     <h5 class="modal-title" id="modalImagenLabel">
                         Imagen del producto
                     </h5>
@@ -275,43 +516,27 @@ Instagram
                         data-bs-dismiss="modal"
                         aria-label="Cerrar">
                     </button>
-
                 </div>
 
-                <!-- Imagen ampliada -->
                 <div class="modal-body text-center">
-
                     <img
                         id="imagenAmpliada"
                         src=""
                         alt=""
                         class="img-fluid rounded">
-
                 </div>
 
             </div>
-
         </div>
-
     </div>
 
-   
-<!-- Bootstrap JavaScript: permite utilizar componentes como la ventana modal -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ARCHIVOS JAVASCRIPT -->
 
-<!-- Configuración de la dirección del Backend -->
-<script src="js/config.js"></script>
-
-<!-- Carga de los productos desde el Backend -->
-<script src="js/productos.js"></script>
-
-<!-- Funciones del carrito y ampliación de imágenes -->
-<script src="js/carrito.js"></script>
-
-<!-- Control de la sesión del usuario -->
-<script src="js/sesion.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/productos.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/sesion.js"></script>
 
 </body>
-
 </html>

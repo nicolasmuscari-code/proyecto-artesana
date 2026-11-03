@@ -1,351 +1,595 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
 
-    <!-- Permite utilizar caracteres especiales como á, é, í, ó, ú y ñ -->
     <meta charset="UTF-8">
-
-    <!-- Hace que la página se adapte correctamente a celulares y tablets -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Título que aparece en la pestaña del navegador -->
-    <title>Artesana - Carrito</title>
+    <title>Artesana - Mi carrito</title>
 
-    <!-- Incorporamos Bootstrap para utilizar sus estilos y clases -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <style>
 
-        /* Contenedor de las imágenes de los productos */
-        #carrito-container .imagen-carrito {
+        /* PALETA DE COLORES ARTESANA */
 
-            width: 240px;
-            height: 200px;
+        :root {
+            --color-fondo: #f8f3eb;
+            --color-crema: #fffaf3;
+            --color-principal: #a65f45;
+            --color-principal-hover: #874a35;
+            --color-secundario: #d9a58b;
+            --color-texto: #49372f;
+            --color-suave: #8b776d;
+            --color-borde: #eadbce;
+        }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        /* CONFIGURACIÓN GENERAL */
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        /* FONDO GENERAL */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+
+            background:
+                linear-gradient(
+                    rgba(248, 243, 235, 0.94),
+                    rgba(248, 243, 235, 0.94)
+                );
+
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* BARRA DE NAVEGACIÓN */
+
+        .navbar-artesana {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(255, 250, 243, 0.97);
+            border-bottom: 1px solid var(--color-borde);
+            box-shadow: 0 3px 15px rgba(73, 55, 47, 0.06);
+        }
+
+        .navbar-artesana .navbar-brand {
+            color: var(--color-principal);
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar-artesana .nav-link {
+            color: var(--color-texto);
+            font-weight: 500;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .navbar-artesana .nav-link:hover {
+            color: var(--color-principal);
+            transform: translateY(-2px);
+        }
+
+        .navbar-toggler {
+            border-color: var(--color-secundario);
+        }
+
+        /* PRESENTACIÓN DEL CARRITO */
+
+        .carrito-hero {
+            text-align: center;
+            padding: 45px 20px 35px;
+            margin-top: 25px;
+            margin-bottom: 35px;
+            background-color: rgba(255, 250, 243, 0.85);
+            border: 1px solid var(--color-borde);
+            border-radius: 22px;
+            box-shadow: 0 8px 25px rgba(73, 55, 47, 0.06);
+        }
+
+        .carrito-hero-icono {
+            font-size: 2.8rem;
+            color: var(--color-principal);
+            margin-bottom: 12px;
+        }
+
+        .carrito-hero h1 {
+            color: var(--color-texto);
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: bold;
+        }
+
+        .carrito-hero p {
+            color: var(--color-suave);
+            font-size: 1.05rem;
+            margin-bottom: 0;
+        }
+
+        /* TÍTULO DE LA LISTA */
+
+        .carrito-subtitulo {
+            font-family: Georgia, serif;
+            font-weight: bold;
+            color: var(--color-texto);
+            margin-bottom: 25px;
+        }
+
+        .titulo-decorativo {
+            width: 75px;
+            height: 3px;
+            margin: 15px auto;
+            background-color: var(--color-principal);
+            border-radius: 5px;
+        }
+
+        /* TARJETAS DE PRODUCTOS GENERADAS POR JAVASCRIPT */
+
+        #carrito-container .card {
+            border: 1px solid var(--color-borde);
+            border-radius: 18px;
+            overflow: hidden;
+            background-color: var(--color-crema);
+            box-shadow: 0 7px 20px rgba(73, 55, 47, 0.07);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        #carrito-container .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(73, 55, 47, 0.12);
+        }
+
+        /* COLUMNA DE IMAGEN */
+
+        #carrito-container .card .col-4 {
             display: flex;
             align-items: center;
             justify-content: center;
-
-            background-color: #f8f9fa;
-
-            overflow: hidden;
+            padding: 12px;
+            background-color: #fffdf9;
         }
 
-
-        /* Imágenes de los productos */
-        #carrito-container .imagen-carrito img {
-
+        #carrito-container .card img {
             width: 100%;
-            height: 100%;
-
-            object-fit: contain;
-        }
-
-
-        /* Mejora visual de las tarjetas de productos */
-        #carrito-container .card {
-
+            max-height: 190px !important;
+            object-fit: contain !important;
             border-radius: 10px;
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
         }
 
+        /* INFORMACIÓN DEL PRODUCTO */
 
-        /* Efecto visual al pasar el mouse sobre una tarjeta */
-        #carrito-container .card:hover {
-
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 4px 12px rgba(0, 0, 0, 0.15);
+        #carrito-container .card-body {
+            padding: 22px;
         }
 
-
-        /* Resumen final del carrito */
-        .resumen-carrito {
-
-            text-align: right;
-
-            padding: 20px 0;
-
-            margin-top: 20px;
-
-            border-top: 2px solid #dee2e6;
+        #carrito-container .card-title {
+            color: var(--color-texto);
+            font-size: 1.2rem;
+            font-weight: 750;
+            margin-bottom: 12px;
         }
 
+        #carrito-container .card-text {
+            color: var(--color-suave);
+            margin-bottom: 8px;
+        }
 
-        /* Total del pedido */
-        .resumen-carrito h3 {
+        #carrito-container .card-text.fw-bold {
+            color: var(--color-principal);
+            font-size: 1.15rem;
+            margin-top: 10px;
+        }
 
+        /* BOTONES DE CANTIDAD */
+
+        #carrito-container .btn-outline-secondary {
+            color: var(--color-principal);
+            border-color: var(--color-secundario);
+            border-radius: 8px;
+            min-width: 36px;
             font-weight: bold;
+        }
 
+        #carrito-container .btn-outline-secondary:hover {
+            background-color: var(--color-principal);
+            border-color: var(--color-principal);
+            color: white;
+        }
+
+        /* BOTÓN ELIMINAR */
+
+        #carrito-container .btn-eliminar {
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+
+        /* RESUMEN DE COMPRA */
+
+        #carrito-container .text-end.mt-4 {
+            background-color: var(--color-crema);
+            border: 1px solid var(--color-borde);
+            border-radius: 16px;
+            padding: 22px;
+            margin-top: 30px !important;
+            box-shadow: 0 5px 15px rgba(73, 55, 47, 0.05);
+        }
+
+        #carrito-container .text-end.mt-4 h4 {
+            color: var(--color-principal);
+            font-weight: 800;
             margin: 0;
         }
 
+        /* CARRITO VACÍO */
 
-        /* Efecto visual para los enlaces del navbar */
-        .navbar-artesana .nav-link {
-
-            transition:
-                transform 0.2s ease,
-                color 0.2s ease;
+        #carrito-container .text-center.py-5 {
+            background-color: var(--color-crema);
+            border: 1px solid var(--color-borde);
+            border-radius: 20px;
+            padding: 55px 20px !important;
+            box-shadow: 0 7px 20px rgba(73, 55, 47, 0.06);
         }
 
+        #carrito-container .text-center.py-5 h3 {
+            color: var(--color-texto);
+            font-family: Georgia, serif;
+            font-weight: bold;
+        }
 
-        /* El enlace se eleva levemente al pasar el mouse */
-        .navbar-artesana .nav-link:hover {
+        #carrito-container .text-center.py-5 p {
+            color: var(--color-suave);
+        }
 
+        /* BOTÓN PRINCIPAL */
+
+        .btn-primary {
+            background-color: var(--color-principal);
+            border: none;
+            border-radius: 10px;
+            padding: 11px 20px;
+            font-weight: 650;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-principal-hover);
             transform: translateY(-2px);
         }
 
-        /* Hace que la página ocupe como mínimo toda la altura de la pantalla */
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+        /* BOTÓN DE WHATSAPP */
 
-/* Hace que el contenido principal ocupe el espacio disponible */
-main {
-    flex: 1;
-}
+        .contenedor-whatsapp {
+            text-align: right;
+            margin-top: 25px;
+            margin-bottom: 35px;
+        }
 
-/* Color del icono de WhatsApp */
-.icon-whatsapp {
-    color: #25D366 !important;
-}
+        #btn-whatsapp {
+            background-color: #278b58;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 24px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(39, 139, 88, 0.18);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
 
-/* Color del icono de Instagram */
-.icon-instagram {
-    color: #E4405F !important;
-}
+        #btn-whatsapp:hover {
+            background-color: #1e7046;
+            transform: translateY(-2px);
+        }
 
+        #btn-whatsapp:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* PIE DE PÁGINA */
+
+        .footer-artesana {
+            background-color: #49372f;
+            color: #fffaf3;
+            padding: 35px 0;
+            margin-top: 60px;
+        }
+
+        .footer-artesana h5 {
+            font-weight: 800;
+        }
+
+        .footer-artesana p {
+            color: #e6d7ca;
+        }
+
+        .footer-artesana a {
+            color: #fffaf3;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-artesana a:hover {
+            color: #e9b99e;
+        }
+
+        .icon-whatsapp {
+            color: #25D366;
+        }
+
+        .icon-instagram {
+            color: #f18a9c;
+        }
+
+        /* ADAPTACIÓN A CELULARES Y TABLETS */
+
+        @media (max-width: 768px) {
+
+            .carrito-hero {
+                padding: 35px 15px;
+                border-radius: 16px;
+            }
+
+            #carrito-container .card-body {
+                padding: 15px;
+            }
+
+            #carrito-container .card-title {
+                font-size: 1rem;
+            }
+
+            #carrito-container .card-text {
+                font-size: 0.9rem;
+            }
+
+            #carrito-container .card img {
+                max-height: 150px !important;
+            }
+
+            #btn-whatsapp {
+                width: 100%;
+            }
+
+        }
+
+        @media (max-width: 576px) {
+
+            #carrito-container .card .col-4 {
+                padding: 7px;
+            }
+
+            #carrito-container .card-body {
+                padding: 12px;
+            }
+
+            #carrito-container .card-title {
+                font-size: 0.95rem;
+            }
+
+            #carrito-container .btn {
+                margin-bottom: 5px;
+            }
+
+            .footer-artesana {
+                text-align: center;
+            }
+
+            .contenedor-whatsapp {
+                text-align: center;
+            }
+
+        }
 
     </style>
 
 </head>
 
-
 <body>
 
+    <!-- BARRA DE NAVEGACIÓN -->
 
-    <!-- Barra de navegación principal del sitio -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-artesana">
+    <nav class="navbar navbar-expand-lg navbar-artesana">
 
-    <div class="container">
+        <div class="container">
 
-        <!-- Nombre de Artesana y enlace para volver al inicio -->
-        <a class="navbar-brand" href="index.html">
-            Artesana
-        </a>
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-flower1"></i> Artesana
+            </a>
 
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarArtesana"
+                aria-controls="navbarArtesana"
+                aria-expanded="false"
+                aria-label="Abrir menú">
 
-        <!-- Botón hamburguesa para pantallas pequeñas -->
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarArtesana"
-            aria-controls="navbarArtesana"
-            aria-expanded="false"
-            aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
 
-            <span class="navbar-toggler-icon"></span>
+            </button>
 
-        </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
 
+                <div class="navbar-nav">
 
-        <!-- Menú de navegación -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
+                    <a class="nav-link" href="velas.html">Velas</a>
 
-            <div class="navbar-nav">
+                    <a class="nav-link" href="mandalas.html">Mandalas</a>
 
-                <a class="nav-link" href="velas.html">
-                    Velas
-                </a>
+                    <a class="nav-link" href="iluminacion.html">Iluminación</a>
 
-                <a class="nav-link" href="mandalas.html">
-                    Mandalas
-                </a>
+                    <a class="nav-link" href="almohadones.html">Almohadones</a>
 
-                <a class="nav-link" href="iluminacion.html">
-                    Iluminación
-                </a>
+                    <a class="nav-link" href="carrito.html">
+                        <i class="bi bi-cart3"></i>
+                        Carrito (<span id="contador-carrito">0</span>)
+                    </a>
 
-                <a class="nav-link" href="almohadones.html">
-                    Almohadones
-                </a>
+                    <a class="nav-link" href="login.html" id="nav-login">
+                        <i class="bi bi-person-circle"></i>
+                        Ingresar
+                    </a>
 
-                <!-- Enlace al carrito y contador de productos -->
-                <a class="nav-link" href="carrito.html">
-                    🛒 Carrito
-                    (<span id="contador-carrito">0</span>)
-                </a>
-
-                <!-- Enlace a la página de inicio de sesión -->
-                <a class="nav-link" href="login.html" id="nav-login">
-                    🔐 Ingresar
-                </a>
+                </div>
 
             </div>
 
         </div>
 
-    </div>
-
-</nav>
+    </nav>
 
 
-    <!-- Contenido principal de la página -->
-    <main class="container py-5">
+    <!-- CONTENIDO PRINCIPAL -->
 
+    <main class="container py-4">
 
-        <!-- Título y descripción de la sección del carrito -->
-        <section class="text-center mb-5">
+        <!-- PRESENTACIÓN DEL CARRITO -->
 
-            <!-- Título principal -->
-            <h1 class="display-5 fw-bold">
+        <section class="carrito-hero">
 
-                🛒 Mi carrito
+            <div class="carrito-hero-icono">
+                <i class="bi bi-bag-heart"></i>
+            </div>
 
-            </h1>
+            <h1>Mi carrito</h1>
 
+            <div class="titulo-decorativo"></div>
 
-            <!-- Descripción de la sección -->
-            <p class="lead mt-3">
-
+            <p>
                 Revisá los productos que seleccionaste
                 antes de realizar tu pedido.
-
             </p>
 
         </section>
 
 
-        <!-- Sección donde JavaScript mostrará los productos seleccionados -->
-        <section class="mb-5">
+        <!-- LISTADO DE PRODUCTOS -->
 
-            <!--
-                Este contenedor comienza vacío.
+        <section class="mb-4">
 
-                JavaScript utiliza este ID para agregar
-                dinámicamente los productos del carrito.
-            -->
+            <h2 class="carrito-subtitulo">
+                <i class="bi bi-basket2"></i>
+                Tu selección
+            </h2>
+
+            <!-- JavaScript carga los productos dinámicamente -->
+
             <div id="carrito-container"></div>
 
         </section>
 
 
-        <!-- Botón para realizar el pedido -->
-        <div class="text-end mt-4">
+        <!-- BOTÓN PARA REALIZAR EL PEDIDO -->
 
-            <!--
-                Este botón permite iniciar el pedido por WhatsApp.
+        <div class="contenedor-whatsapp">
 
-                Su funcionamiento se controla mediante JavaScript.
-            -->
             <button
                 id="btn-whatsapp"
                 class="btn btn-success btn-lg">
 
                 <i class="bi bi-whatsapp"></i>
-                 Realizar pedido por WhatsApp
+                Realizar pedido por WhatsApp
 
             </button>
 
         </div>
 
-
     </main>
 
 
-    <!-- Pie de página con información general del emprendimiento -->
-    <footer class="py-4 mt-5 border-top">
+    <!-- PIE DE PÁGINA -->
+
+    <footer class="footer-artesana">
 
         <div class="container">
 
             <div class="row align-items-center">
 
+                <!-- INFORMACIÓN DE ARTESANA -->
 
-                <!-- Información general de Artesana -->
                 <div class="col-12 col-md-4 text-center text-md-start">
 
                     <h5>
-
+                        <i class="bi bi-flower1"></i>
                         Artesana
-
                     </h5>
 
-
                     <p class="mb-0">
-
                         Velas, Mandalas, Iluminación y mucho más.
-
                     </p>
 
                 </div>
 
 
-                <!-- Redes sociales y medios de contacto -->
+                <!-- REDES SOCIALES -->
+
                 <div class="col-12 col-md-4 text-center my-3 my-md-0">
 
-
-                    <!-- Enlace directo a WhatsApp -->
                     <a
                         href="https://wa.me/5491165076525"
                         target="_blank"
-                        class="text-decoration-none me-3">
+                        rel="noopener noreferrer"
+                        class="me-3">
 
                         <i class="bi bi-whatsapp icon-whatsapp"></i>
-WhatsApp
+                        WhatsApp
 
                     </a>
 
-
-                    <!-- Enlace al perfil de Instagram -->
                     <a
                         href="https://www.instagram.com/arte_sana_aromas/"
                         target="_blank"
-                        class="text-decoration-none">
+                        rel="noopener noreferrer">
 
-      <i class="bi bi-instagram icon-instagram"></i>
-Instagram
+                        <i class="bi bi-instagram icon-instagram"></i>
+                        Instagram
 
                     </a>
 
                 </div>
 
 
-                <!-- Derechos y autor del desarrollo -->
+                <!-- DERECHOS Y AUTOR -->
+
                 <div class="col-12 col-md-4 text-center text-md-end">
 
-
                     <p class="mb-1">
-
                         © 2026 Artesana — Todos los derechos reservados.
-
                     </p>
 
-
                     <p class="mb-0">
-
                         Desarrollado por
-
                         <a href="mailto:nicolasmuscari5@gmail.com">
-
                             Nicolás Muscari
-
                         </a>
-
                     </p>
 
                 </div>
-
 
             </div>
 
@@ -354,26 +598,15 @@ Instagram
     </footer>
 
 
-    <!--
-        Conectamos el archivo JavaScript del carrito.
+    <!-- BOOTSTRAP JAVASCRIPT -->
 
-        Este archivo se encarga de manejar:
-        - Los productos agregados al carrito.
-        - El contador de productos.
-        - La visualización de los productos.
-        - La eliminación de productos.
-        - El pedido por WhatsApp.
-    -->
-
-    <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-   <!-- Conectamos el archivo JavaScript encargado de manejar el carrito -->
-    <script src="js/carrito.js"></script>
+  <!-- ARCHIVOS JAVASCRIPT DEL PROYECTO -->
 
-    <!-- Conectamos el archivo JavaScript encargado de controlar la sesión del usuario -->
-    <script src="js/sesion.js"></script>
-
+<script src="js/config.js"></script>
+<script src="js/carrito.js"></script>
+<script src="js/sesion.js"></script>
 
 </body>
 

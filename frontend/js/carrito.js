@@ -412,7 +412,7 @@ if (botonWhatsapp) {
         try {
             // Enviamos al backend los ID y las cantidades.
             const respuesta = await fetch(
-                "http://localhost:3000/pedidos",
+                 `${API_BASE_URL}/pedidos`,
                 {
                     method: "POST",
 

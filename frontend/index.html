@@ -3,383 +3,1007 @@
 
 <head>
 
-    <!-- Configuración de caracteres utilizados por la página -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Permite que la página se adapte correctamente a distintos tamaños de pantalla -->
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <title>Artesana | Creaciones artesanales</title>
 
-    <!-- Título que aparece en la pestaña del navegador -->
-    <title>Artesana</title>
-
-    <!-- Incorporamos Bootstrap para utilizar sus estilos y clases -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
     <style>
 
-/* Agrega una sombra para mejorar visualmente las tarjetas */
-.card {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
-}
+        /* =========================================
+           1. IDENTIDAD VISUAL DE ARTESANA
+        ========================================= */
 
-/* Mantiene todas las imágenes de las categorías con el mismo tamaño */
-.card-img-top {
-    height: 220px;
-    object-fit: cover;
-}
+        :root {
+            --color-fondo: #f8f3eb;
+            --color-crema: #fffaf3;
+            --color-principal: #a65f45;
+            --color-principal-hover: #874a35;
+            --color-secundario: #d9a58b;
+            --color-texto: #49372f;
+            --color-suave: #8b776d;
+            --color-borde: #eadbce;
+            --color-oscuro: #49352d;
+        }
 
-        /* Imagen principal de Artesana */
-.imagen-principal {
-    width: 100%;
-    max-width: 800px;
-    height: 400px;
-    object-fit: cover;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-}
-    
+        * {
+            box-sizing: border-box;
+        }
 
-        /* Presentación principal de Artesana */
-.encabezado-artesana {
-    padding: 40px 20px;
-    border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-}
+        html {
+            scroll-behavior: smooth;
+            background: #f3e5d8;
+        }
 
-        /* Mantiene la barra de navegación visible al desplazarse por la página */
-.navbar-artesana {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            isolation: isolate;
+            color: var(--color-texto);
+            font-family: "Segoe UI", sans-serif;
+            background: transparent;
+        }
 
-/* Efecto visual para los enlaces del navbar */
-.navbar-artesana .nav-link {
-    transition: transform 0.2s ease, color 0.2s ease;
-}
+        /* Fondo decorativo: manchas cálidas, textura y motivos artesanales */
 
-/* El enlace se eleva levemente al pasar el mouse */
-.navbar-artesana .nav-link:hover {
-    transform: translateY(-2px);
-}
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-color: #f7eee5;
+            background-image:
+                radial-gradient(ellipse at 4% 10%, rgba(210, 145, 112, 0.34) 0, transparent 30%),
+                radial-gradient(ellipse at 96% 16%, rgba(166, 95, 69, 0.19) 0, transparent 28%),
+                radial-gradient(ellipse at 82% 78%, rgba(221, 177, 145, 0.34) 0, transparent 32%),
+                radial-gradient(ellipse at 8% 88%, rgba(190, 125, 94, 0.21) 0, transparent 28%),
+                radial-gradient(ellipse at 50% 48%, rgba(255, 250, 243, 0.88) 0, rgba(255, 250, 243, 0.36) 42%, transparent 76%),
+                repeating-linear-gradient(135deg, rgba(130, 79, 58, 0.035) 0, rgba(130, 79, 58, 0.035) 1px, transparent 1px, transparent 14px),
+                repeating-radial-gradient(circle at 12% 18%, transparent 0 20px, rgba(166, 95, 69, 0.045) 21px 22px, transparent 23px 46px),
+                linear-gradient(115deg, #f5e7dc 0%, #fffaf3 48%, #f3e3d6 100%);
+            background-attachment: fixed;
+        }
 
-/* Color del icono de WhatsApp */
-.icon-whatsapp {
-    color: #25D366;
-}
+        /* Adornos suaves en los laterales para dar profundidad al fondo */
 
-/* Color del icono de Instagram */
-.icon-instagram {
-    color: #E4405F;
-}
+        body::after {
+            content: "✿";
+            position: fixed;
+            z-index: -1;
+            pointer-events: none;
+            left: -38px;
+            top: 34%;
+            color: rgba(166, 95, 69, 0.085);
+            font-family: Georgia, serif;
+            font-size: clamp(180px, 25vw, 360px);
+            line-height: 1;
+            transform: rotate(-18deg);
+            text-shadow: 0 0 1px rgba(166, 95, 69, 0.08);
+        }
+
+        /* Segundo detalle floral: equilibra visualmente el lateral derecho */
+
+        .decoracion-fondo-derecha {
+            position: fixed;
+            z-index: -1;
+            pointer-events: none;
+            right: -55px;
+            top: 58%;
+            color: rgba(166, 95, 69, 0.045);
+            font-family: Georgia, serif;
+            font-size: clamp(150px, 21vw, 300px);
+            line-height: 1;
+            transform: rotate(16deg);
+        }
+
+        main {
+            flex: 1;
+        }
+
+
+        /* =========================================
+           2. BARRA DE NAVEGACIÓN
+        ========================================= */
+
+        .navbar-artesana {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(255, 250, 243, 0.97);
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid var(--color-borde);
+            box-shadow: 0 4px 18px rgba(73, 55, 47, 0.07);
+        }
+
+        .navbar-artesana .navbar-brand {
+            color: var(--color-principal);
+            font-size: 1.65rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar-artesana .navbar-brand i {
+            margin-right: 5px;
+        }
+
+        .navbar-artesana .nav-link {
+            color: var(--color-texto);
+            font-weight: 600;
+            margin-left: 5px;
+
+            transition: all 0.25s ease;
+        }
+
+        .navbar-artesana .nav-link:hover {
+            color: var(--color-principal);
+            transform: translateY(-2px);
+        }
+
+        .navbar-toggler {
+            border-color: var(--color-secundario);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.2rem rgba(166, 95, 69, 0.20);
+        }
+
+
+        /* =========================================
+           3. PORTADA PRINCIPAL / HERO
+        ========================================= */
+
+        .hero-artesana {
+            min-height: 570px;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+            overflow: hidden;
+
+            margin-top: 25px;
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(40, 25, 19, 0.84) 0%,
+                    rgba(40, 25, 19, 0.65) 48%,
+                    rgba(40, 25, 19, 0.18) 100%
+                ),
+                url("imagenes/velas/Vela_Soja_Bocha_Vidrio.jpg");
+
+            background-size: cover;
+            background-position: center 55%;
+            isolation: isolate;
+
+            box-shadow: 0 15px 40px rgba(73, 55, 47, 0.20);
+        }
+
+        .hero-artesana::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(255, 230, 190, 0.18),
+                    transparent 28%
+                );
+        }
+
+        .hero-contenido {
+            position: relative;
+            z-index: 2;
+
+            max-width: 680px;
+            padding: 75px 65px;
+
+            color: white;
+        }
+
+        .hero-etiqueta {
+            display: inline-block;
+
+            padding: 9px 17px;
+            margin-bottom: 22px;
+
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            color: #fff3e7;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-contenido h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(3rem, 6vw, 5.3rem);
+            font-weight: bold;
+            line-height: 1.05;
+
+            margin-bottom: 22px;
+        }
+
+        .hero-contenido h1 span {
+            color: #e8b99e;
+        }
+
+        .hero-contenido p {
+            max-width: 550px;
+
+            color: #f7eae0;
+            font-size: 1.15rem;
+            line-height: 1.8;
+
+            margin-bottom: 30px;
+        }
+
+        .btn-hero {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 14px 25px;
+
+            border-radius: 9px;
+            border: 1px solid var(--color-secundario);
+
+            background: var(--color-crema);
+            color: var(--color-principal);
+
+            font-weight: 800;
+            text-decoration: none;
+
+            transition: all 0.25s ease;
+        }
+
+        .btn-hero:hover {
+            background: var(--color-principal);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.20);
+        }
+
+        .hero-detalle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-top: 30px;
+
+            color: #f7eae0;
+            font-size: 0.9rem;
+        }
+
+        .hero-detalle i {
+            color: #e8b99e;
+            font-size: 1.2rem;
+        }
+
+
+        /* =========================================
+           4. FRANJA DECORATIVA
+        ========================================= */
+
+        .franja-artesana {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 35px;
+
+            padding: 22px 15px;
+            margin: 25px 0 65px;
+
+            background: rgba(255, 250, 243, 0.78);
+            border-top: 1px solid var(--color-borde);
+            border-bottom: 1px solid var(--color-borde);
+        }
+
+        .franja-artesana::before,
+        .franja-artesana::after {
+            content: "✧  ·  ✿  ·  ✧";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(166, 95, 69, 0.30);
+            font-size: 0.78rem;
+            letter-spacing: 7px;
+            white-space: nowrap;
+        }
+
+        .franja-artesana::before {
+            top: -12px;
+        }
+
+        .franja-artesana::after {
+            bottom: -12px;
+        }
+
+        .franja-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            color: var(--color-texto);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .franja-item i {
+            color: var(--color-principal);
+            font-size: 1.25rem;
+        }
+
+
+        /* =========================================
+           5. PRESENTACIÓN DE ARTESANA
+        ========================================= */
+
+        .presentacion-artesana {
+            position: relative;
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            align-items: stretch;
+            gap: 0;
+            max-width: 1080px;
+            min-height: 390px;
+            margin: 0 auto 90px;
+            overflow: hidden;
+            background: rgba(255, 250, 243, 0.94);
+            border: 1px solid rgba(234, 219, 206, 0.95);
+            border-radius: 26px;
+            box-shadow: 0 18px 45px rgba(73, 55, 47, 0.12);
+        }
+
+        .presentacion-visual {
+            position: relative;
+            min-height: 390px;
+            overflow: hidden;
+            background: #d9b49e;
+        }
+
+        .presentacion-visual img {
+            width: 100%;
+            height: 100%;
+            min-height: 390px;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .presentacion-artesana:hover .presentacion-visual img {
+            transform: scale(1.045);
+        }
+
+        .presentacion-visual::after {
+            content: "Hecho con amor";
+            position: absolute;
+            left: 22px;
+            bottom: 22px;
+            padding: 10px 17px;
+            border: 1px solid rgba(255,255,255,0.55);
+            border-radius: 30px;
+            background: rgba(55, 37, 29, 0.58);
+            color: #fffaf3;
+            font-family: Georgia, serif;
+            font-size: 1rem;
+            font-style: italic;
+            letter-spacing: 0.4px;
+            backdrop-filter: blur(7px);
+        }
+
+        .presentacion-texto {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 48px clamp(28px, 5vw, 62px);
+            background:
+                radial-gradient(circle at 100% 0%, rgba(217,165,139,0.20), transparent 35%),
+                linear-gradient(145deg, #fffaf3, #f6e9dd);
+        }
+
+        .presentacion-sobretitulo {
+            margin-bottom: 13px;
+            color: var(--color-principal);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .presentacion-artesana h2 {
+            color: var(--color-texto);
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 3.4vw, 2.8rem);
+            font-weight: bold;
+            line-height: 1.12;
+            margin-bottom: 17px;
+        }
+
+        .presentacion-artesana h2 span {
+            color: var(--color-principal);
+            font-style: italic;
+        }
+
+        .presentacion-artesana .titulo-linea {
+            width: 66px;
+            height: 3px;
+            margin: 0 0 22px;
+            background: var(--color-principal);
+            border-radius: 10px;
+        }
+
+        .presentacion-artesana p {
+            color: #766158;
+            font-size: 1rem;
+            line-height: 1.85;
+            margin-bottom: 13px;
+        }
+
+        .presentacion-firma {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 12px;
+            color: var(--color-principal);
+            font-family: Georgia, serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .presentacion-firma i {
+            font-size: 1.15rem;
+        }
+
+
+        /* =========================================
+           6. SECCIÓN ¿POR QUÉ ELEGIR ARTESANA?
+        ========================================= */
+
+        .seccion-valores {
+            position: relative;
+            margin-bottom: 90px;
+            padding-top: 18px;
+        }
+
+        .seccion-valores::before {
+            content: "";
+            display: block;
+            width: min(260px, 55%);
+            height: 1px;
+            margin: 0 auto 48px;
+            background: linear-gradient(90deg, transparent, rgba(166,95,69,0.42), transparent);
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            margin-bottom: 42px;
+        }
+
+        .titulo-seccion h2 {
+            font-size: 2.35rem;
+            margin-bottom: 12px;
+        }
+
+        .titulo-seccion p {
+            color: var(--color-suave);
+            font-size: 1rem;
+        }
+
+        .titulo-linea {
+            width: 65px;
+            height: 3px;
+
+            margin: 18px auto;
+
+            background: var(--color-principal);
+            border-radius: 10px;
+        }
+
+        .valor-card {
+            height: 100%;
+            padding: 35px 25px;
+
+            text-align: center;
+
+            background: rgba(255, 250, 243, 0.90);
+            border: 1px solid var(--color-borde);
+            border-radius: 16px;
+
+            transition: all 0.3s ease;
+        }
+
+        .valor-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 28px rgba(73, 55, 47, 0.10);
+            border-color: var(--color-secundario);
+        }
+
+        .valor-icono {
+            color: var(--color-principal);
+            font-size: 2rem;
+            margin-bottom: 18px;
+        }
+
+        .valor-card h3 {
+            font-family: Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: bold;
+
+            margin-bottom: 12px;
+        }
+
+        .valor-card p {
+            color: var(--color-suave);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+
+        /* =========================================
+           7. CATEGORÍAS DEL CATÁLOGO
+        ========================================= */
+
+        .seccion-categorias {
+            position: relative;
+            margin-top: 18px;
+            margin-bottom: 95px;
+            padding: 48px 30px 55px;
+            border: 1px solid rgba(234, 219, 206, 0.75);
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(217,165,139,0.20), transparent 28%),
+                radial-gradient(circle at 100% 100%, rgba(166,95,69,0.09), transparent 30%),
+                rgba(255,250,243,0.48);
+            box-shadow: 0 12px 35px rgba(73,55,47,0.045);
+        }
+
+        .seccion-categorias::before {
+            content: "✿";
+            position: absolute;
+            top: -23px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0 18px;
+            background: #f8f0e8;
+            color: rgba(166,95,69,0.68);
+            font-size: 1.25rem;
+        }
+
+        .categoria-card {
+            height: 100%;
+            overflow: hidden;
+
+            background: var(--color-crema);
+            border: 1px solid var(--color-borde);
+            border-radius: 17px;
+
+            box-shadow: 0 7px 20px rgba(73, 55, 47, 0.07);
+
+            transition: all 0.35s ease;
+        }
+
+        .categoria-card:hover {
+            transform: translateY(-11px);
+            border-color: rgba(166, 95, 69, 0.38);
+            box-shadow: 0 20px 38px rgba(73, 55, 47, 0.19);
+        }
+
+        .categoria-imagen {
+            height: 245px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .categoria-imagen img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            object-position: center;
+
+            transition: transform 0.55s ease;
+        }
+
+        .categoria-card:hover .categoria-imagen img {
+            transform: scale(1.06);
+        }
+
+        .categoria-contenido {
+            padding: 25px 20px 28px;
+            text-align: center;
+        }
+
+        .categoria-contenido h3 {
+            font-family: Georgia, serif;
+            font-size: 1.45rem;
+            font-weight: bold;
+
+            margin-bottom: 12px;
+        }
+
+        .categoria-contenido p {
+            min-height: 55px;
+
+            color: var(--color-suave);
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+        }
+
+        .btn-categoria {
+            display: inline-block;
+
+            padding: 11px 22px;
+
+            border-radius: 8px;
+            background: var(--color-principal);
+
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+
+            transition: all 0.25s ease;
+        }
+
+        .btn-categoria:hover {
+            background: var(--color-principal-hover);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================
+           8. INVITACIÓN FINAL
+        ========================================= */
+
+        .invitacion-artesana {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 250, 243, 0.35);
+
+            padding: 65px 30px;
+            margin-bottom: 75px;
+
+            text-align: center;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(65, 46, 38, 0.96),
+                    rgba(126, 76, 57, 0.93)
+                );
+
+            box-shadow: 0 12px 30px rgba(73, 55, 47, 0.16);
+        }
+
+        .invitacion-artesana::before {
+            content: "✦";
+            position: absolute;
+            top: 10px;
+            left: 7%;
+
+            color: rgba(255, 255, 255, 0.12);
+            font-size: 8rem;
+        }
+
+        .invitacion-artesana::after {
+            content: "✧";
+            position: absolute;
+            right: 8%;
+            bottom: -35px;
+
+            color: rgba(255, 255, 255, 0.12);
+            font-size: 10rem;
+        }
+
+        .invitacion-contenido {
+            position: relative;
+            z-index: 2;
+        }
+
+        .invitacion-artesana i {
+            color: #e8b99e;
+            font-size: 2.2rem;
+        }
+
+        .invitacion-artesana h2 {
+            margin: 18px 0;
+
+            color: white;
+            font-family: Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: bold;
+        }
+
+        .invitacion-artesana p {
+            max-width: 650px;
+            margin: 0 auto 28px;
+
+            color: #f4e4d9;
+            line-height: 1.8;
+        }
+
+
+        /* =========================================
+           9. PIE DE PÁGINA
+        ========================================= */
+
+        .footer-artesana {
+            padding: 38px 0 25px;
+
+            background: var(--color-oscuro);
+            color: #f5e8dc;
+        }
+
+        .footer-artesana h5 {
+            font-family: Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-artesana p {
+            color: #e7d8cc;
+            font-size: 0.9rem;
+        }
+
+        .footer-artesana a {
+            color: #f5e8dc;
+            text-decoration: none;
+
+            transition: color 0.2s ease;
+        }
+
+        .footer-artesana a:hover {
+            color: #e8b99e;
+        }
+
+        .icon-whatsapp {
+            color: #25D366;
+        }
+
+        .icon-instagram {
+            color: #E4405F;
+        }
+
+        .footer-redes a {
+            display: inline-block;
+            margin: 5px 8px;
+        }
+
+
+        /* =========================================
+           10. ADAPTACIÓN A CELULARES Y TABLETS
+        ========================================= */
+
+        @media (max-width: 768px) {
+
+            .hero-artesana {
+                min-height: 520px;
+                background-position: center;
+            }
+
+            .hero-contenido {
+                padding: 55px 28px;
+            }
+
+            .hero-contenido h1 {
+                font-size: 3.2rem;
+            }
+
+            .hero-contenido p {
+                font-size: 1rem;
+            }
+
+            .franja-artesana {
+                gap: 17px;
+                margin-bottom: 45px;
+            }
+
+            .presentacion-artesana {
+                grid-template-columns: 1fr;
+                margin: 0 auto 65px;
+            }
+
+            .presentacion-visual,
+            .presentacion-visual img {
+                min-height: 280px;
+                height: 280px;
+            }
+
+            .presentacion-texto {
+                padding: 36px 28px 40px;
+            }
+
+            .presentacion-artesana h2 {
+                font-size: 2rem;
+            }
+
+            .seccion-categorias {
+                padding: 35px 18px 40px;
+                border-radius: 20px;
+            }
+
+            .titulo-seccion h2 {
+                font-size: 1.9rem;
+            }
+
+            .categoria-imagen {
+                height: 230px;
+            }
+
+            .invitacion-artesana h2 {
+                font-size: 1.8rem;
+            }
+
+            .footer-artesana {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .hero-artesana {
+                min-height: 490px;
+                margin-top: 12px;
+                border-radius: 15px;
+            }
+
+            .hero-contenido {
+                padding: 40px 22px;
+            }
+
+            .hero-contenido h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-etiqueta {
+                font-size: 0.7rem;
+            }
+
+            .hero-detalle {
+                font-size: 0.8rem;
+            }
+
+            .franja-artesana {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 25px;
+            }
+
+            .categoria-imagen {
+                height: 220px;
+            }
+        }
 
     </style>
 
 </head>
 
 
-<body class="d-flex flex-column min-vh-100">
+<body>
 
+    <div class="decoracion-fondo-derecha" aria-hidden="true">✿</div>
 
-   <!-- Barra de navegación principal del sitio -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-artesana">
+    <!-- =========================================
+         BARRA DE NAVEGACIÓN
+    ========================================= -->
 
-    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-artesana">
 
-        <!-- Nombre de Artesana y enlace para volver al inicio -->
-        <a class="navbar-brand" href="index.html">
-            Artesana
-        </a>
+        <div class="container">
 
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-flower1"></i> Artesana
+            </a>
 
-        <!-- Botón hamburguesa para pantallas pequeñas -->
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarArtesana"
-            aria-controls="navbarArtesana"
-            aria-expanded="false"
-            aria-label="Abrir menú">
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarArtesana"
+                aria-controls="navbarArtesana"
+                aria-expanded="false"
+                aria-label="Abrir menú">
 
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
 
-        </button>
+            </button>
 
+            <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
 
-        <!-- Menú de navegación -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
+                <div class="navbar-nav">
 
-            <div class="navbar-nav">
+                    <a class="nav-link" href="velas.html">Velas</a>
 
-                <a class="nav-link" href="velas.html">
-                    Velas
-                </a>
+                    <a class="nav-link" href="mandalas.html">Mandalas</a>
 
-                <a class="nav-link" href="mandalas.html">
-                    Mandalas
-                </a>
+                    <a class="nav-link" href="iluminacion.html">Iluminación</a>
 
-                <a class="nav-link" href="iluminacion.html">
-                    Iluminación
-                </a>
+                    <a class="nav-link" href="almohadones.html">Almohadones</a>
 
-                <a class="nav-link" href="almohadones.html">
-                    Almohadones
-                </a>
+                    <a class="nav-link" href="carrito.html">
+                        <i class="bi bi-cart3"></i>
+                        Carrito (<span id="contador-carrito">0</span>)
+                    </a>
 
-                <!-- Enlace al carrito y contador de productos -->
-                <a class="nav-link" href="carrito.html">
-                    🛒 Carrito
-                    (<span id="contador-carrito">0</span>)
-                </a>
+                    <a class="nav-link" href="login.html" id="nav-login">
+                        <i class="bi bi-person-circle"></i>
+                        Ingresar
+                    </a>
 
-                <!-- Enlace a la página de inicio de sesión -->
-                <a class="nav-link" href="login.html" id="nav-login">
-                    🔐 Ingresar
-                </a>
+                </div>
 
             </div>
 
         </div>
 
-    </div>
-
-</nav>
-
-    <!-- Encabezado principal de la página -->
-    <header class="container text-center mt-5 encabezado-artesana">
-
-        <h1 class="display-1 fw-bold">
-            Artesana
-        </h1>
-
-        <!-- Descripción principal del emprendimiento -->
-        <p class="lead mt-3">
-            Velas, Mandalas, Iluminación y mucho más...
-        </p>
-
-        <p class="mt-4">
-            Productos artesanales realizados con amor,
-            dedicación y atención en cada detalle.
-        </p>
-
-        <!-- Imagen principal del sitio -->
-        <img src="imagenes/velas/Vela_Soja_Bocha_Vidrio.jpg"
-     class="img-fluid rounded mt-4 imagen-principal"
-     alt="Vela artesanal de soja">
-
-    </header>
+    </nav>
 
 
-    <!-- Contenido principal de la página -->
-    <main class="container py-5 flex-grow-1">
+    <!-- =========================================
+         CONTENIDO PRINCIPAL
+    ========================================= -->
+
+    <main>
 
 
-        <!-- Sección que presenta brevemente el emprendimiento -->
-        <section class="text-center mb-5">
+        <!-- PORTADA PRINCIPAL -->
 
-            <h2>
-                Conocé Artesana
-            </h2>
+        <section class="container">
 
-            <p class="lead">
-                En Artesana creamos productos artesanales pensados
-                para decorar, regalar y darle un toque especial a cada espacio.
-            </p>
+            <div class="hero-artesana">
 
-            <p>
-                Cada producto es realizado con dedicación y atención en cada detalle.
-            </p>
+                <div class="hero-contenido">
 
-        </section>
+                    <span class="hero-etiqueta">
+                        <i class="bi bi-stars"></i>
+                        Creaciones con identidad propia
+                    </span>
 
-
-        <!-- Sección que muestra algunas características de Artesana -->
-        <section class="text-center mb-5">
-
-            <h2 class="mb-4">
-                ¿Por qué elegir Artesana?
-            </h2>
-
-            <div class="row g-4">
-
-                <div class="col-12 col-md-4">
-
-                    <h3>
-                        ❤️ Hecho con dedicación
-                    </h3>
+                    <h1>
+                        El encanto de lo <span>artesanal</span>
+                    </h1>
 
                     <p>
-                        Cada producto es realizado artesanalmente,
-                        cuidando cada detalle.
+                        Descubrí productos creados para decorar,
+                        regalar y llenar de calidez cada rincón.
+                        Cada detalle tiene una historia y mucho amor.
                     </p>
 
-                </div>
+                    <a href="#categorias" class="btn-hero">
+                        Descubrí nuestro catálogo
+                        <i class="bi bi-arrow-down-right"></i>
+                    </a>
 
-
-                <div class="col-12 col-md-4">
-
-                    <h3>
-                        🎨 Diseños artesanales
-                    </h3>
-
-                    <p>
-                        Productos con diseños pensados para darle
-                        un toque especial a cada espacio.
-                    </p>
-
-                </div>
-
-
-                <div class="col-12 col-md-4">
-
-                    <h3>
-                        🎁 Para regalar y decorar
-                    </h3>
-
-                    <p>
-                        Opciones artesanales ideales para regalar
-                        o decorar tu hogar.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- Sección principal del catálogo -->
-        <section>
-
-            <h2 class="text-center mb-4">
-                Explorá nuestro catálogo
-            </h2>
-
-            <div class="row g-4">
-
-
-                <!-- Tarjeta correspondiente a la categoría Velas -->
-                <div class="col-12 col-md-6 col-lg-3">
-
-                    <div class="card h-100 text-center">
-
-                        <img src="imagenes/velas/Vela_Soja_Bocha_Vidrio.jpg"
-                             class="card-img-top"
-                             alt="Velas artesanales">
-
-                        <div class="card-body">
-
-                            <h3 class="card-title">
-                                🕯️ Velas
-                            </h3>
-
-                            <p class="card-text">
-                                Velas artesanales para crear ambientes especiales.
-                            </p>
-
-                            <!-- Enlace para ingresar a la categoría Velas -->
-                            <a href="velas.html" class="btn btn-primary">
-                                Ver velas
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Tarjeta correspondiente a la categoría Mandalas -->
-                <div class="col-12 col-md-6 col-lg-3">
-
-                    <div class="card h-100 text-center">
-
-                        <img src="imagenes/Mandalas/Mandalitas.png"
-                             class="card-img-top"
-                             alt="Mandala artesanal">
-
-                        <div class="card-body">
-
-                            <h3 class="card-title">
-                                🎨 Mandalas
-                            </h3>
-
-                            <p class="card-text">
-                                Diseños artesanales para decorar tus espacios.
-                            </p>
-
-                            <!-- Enlace para ingresar a la categoría Mandalas -->
-                            <a href="mandalas.html" class="btn btn-primary">
-                                Ver mandalas
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Tarjeta correspondiente a la categoría Iluminación -->
-                <div class="col-12 col-md-6 col-lg-3">
-
-                    <div class="card h-100 text-center">
-
-                        <img src="imagenes/Iluminacion/Velador_Bob_Esponja.jpg"
-                             class="card-img-top"
-                             alt="Velador infantil artesanal">
-
-                        <div class="card-body">
-
-                            <h3 class="card-title">
-                                💡 Iluminación
-                            </h3>
-
-                            <p class="card-text">
-                                Veladores infantiles, colgantes y mucho más.
-                            </p>
-
-                            <!-- Enlace para ingresar a la categoría Iluminación -->
-                            <a href="iluminacion.html" class="btn btn-primary">
-                                Ver iluminación
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Tarjeta correspondiente a la categoría Almohadones -->
-                <div class="col-12 col-md-6 col-lg-3">
-
-                    <div class="card h-100 text-center">
-
-                        <img src="imagenes/Almohadones/Almohadon_Buho.jpg"
-                             class="card-img-top"
-                             alt="Almohadón artesanal">
-
-                        <div class="card-body">
-
-                            <h3 class="card-title">
-                                🛋️ Almohadones
-                            </h3>
-
-                            <p class="card-text">
-                                Almohadones con diseños artesanales y mas.
-                            </p>
-
-                            <!-- Enlace para ingresar a la categoría Almohadones -->
-                            <a href="almohadones.html" class="btn btn-primary">
-                                Ver almohadones
-                            </a>
-
-                        </div>
-
+                    <div class="hero-detalle">
+                        <i class="bi bi-heart-fill"></i>
+                        Hecho con amor, dedicación y creatividad.
                     </div>
 
                 </div>
@@ -389,42 +1013,381 @@
         </section>
 
 
-        <!-- Sección que invita al usuario a realizar un pedido -->
-        <section class="text-center py-5">
+        <!-- FRANJA DE ATRIBUTOS -->
 
-            <h2>
-                📱 ¿Querés hacer un pedido?
-            </h2>
+        <section class="franja-artesana">
 
-            <p class="lead mt-3">
-                Explorá nuestro catálogo y encontrá el producto
-                que estás buscando.
-            </p>
+            <div class="franja-item">
+                <i class="bi bi-heart"></i>
+                Hecho con dedicación
+            </div>
 
-            <p>
-                Agregá los productos
-                al carrito y realizá tu pedido por WhatsApp.
-            </p>
+            <div class="franja-item">
+                <i class="bi bi-palette"></i>
+                Diseños especiales
+            </div>
+
+            <div class="franja-item">
+                <i class="bi bi-gift"></i>
+                Ideas para regalar
+            </div>
+
+            <div class="franja-item">
+                <i class="bi bi-house-heart"></i>
+                Detalles para tu hogar
+            </div>
 
         </section>
 
+
+        <div class="container">
+
+
+            <!-- PRESENTACIÓN DEL EMPRENDIMIENTO -->
+
+            <section class="presentacion-artesana">
+
+                <div class="presentacion-visual">
+                    <img
+                        src="imagenes/Mandalas/Mandalitas.png"
+                        alt="Creación artesanal de Artesana">
+                </div>
+
+                <div class="presentacion-texto">
+                    <span class="presentacion-sobretitulo">
+                        <i class="bi bi-stars"></i> Un mundo hecho a mano
+                    </span>
+
+                    <h2>Bienvenidos a <span>Artesana</span></h2>
+
+                    <div class="titulo-linea"></div>
+
+                    <p>
+                        Somos un emprendimiento donde la creatividad se transforma
+                        en pequeños detalles para disfrutar, regalar y llenar de
+                        calidez cada espacio.
+                    </p>
+
+                    <p>
+                        Cada propuesta tiene su propio encanto y está elegida
+                        con dedicación, cariño y atención en cada detalle.
+                    </p>
+
+                    <p>
+                        Nos encanta que encuentres acá algo especial, hecho para
+                        acompañar tus momentos y darle personalidad a tu hogar.
+                    </p>
+
+                    <div class="presentacion-firma">
+                        <i class="bi bi-heart-fill"></i>
+                        Artesana, detalles que enamoran.
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- VALORES DE ARTESANA -->
+
+            <section class="seccion-valores">
+
+                <div class="titulo-seccion">
+
+                    <h2>¿Qué hace especial a Artesana?</h2>
+
+                    <div class="titulo-linea"></div>
+
+                    <p>
+                        Pequeños detalles que hacen la diferencia.
+                    </p>
+
+                </div>
+
+
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-4">
+
+                        <div class="valor-card">
+
+                            <div class="valor-icono">
+                                <i class="bi bi-heart"></i>
+                            </div>
+
+                            <h3>Hecho con dedicación</h3>
+
+                            <p>
+                                Cada producto es realizado artesanalmente,
+                                cuidando cada detalle de su elaboración.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12 col-md-4">
+
+                        <div class="valor-card">
+
+                            <div class="valor-icono">
+                                <i class="bi bi-palette"></i>
+                            </div>
+
+                            <h3>Diseños especiales</h3>
+
+                            <p>
+                                Diferentes propuestas y diseños para
+                                darle personalidad y estilo a cada espacio.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12 col-md-4">
+
+                        <div class="valor-card">
+
+                            <div class="valor-icono">
+                                <i class="bi bi-gift"></i>
+                            </div>
+
+                            <h3>Para regalar y decorar</h3>
+
+                            <p>
+                                Opciones artesanales para sorprender
+                                a alguien especial o disfrutar en tu hogar.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CATEGORÍAS DEL CATÁLOGO -->
+
+            <section class="seccion-categorias" id="categorias">
+
+                <div class="titulo-seccion">
+
+                    <h2>Explorá nuestro catálogo</h2>
+
+                    <div class="titulo-linea"></div>
+
+                    <p>
+                        Conocé nuestras categorías y encontrá tu próximo detalle favorito.
+                    </p>
+
+                </div>
+
+
+                <div class="row g-4">
+
+
+                    <!-- CATEGORÍA VELAS -->
+
+                    <div class="col-12 col-md-6 col-lg-3">
+
+                        <div class="categoria-card">
+
+                            <div class="categoria-imagen">
+
+                                <img
+                                    src="imagenes/velas/Vela_Soja_Bocha_Vidrio.jpg"
+                                    alt="Velas artesanales de soja">
+
+                            </div>
+
+                            <div class="categoria-contenido">
+
+                                <h3>
+                                    <i class="bi bi-fire"></i> Velas
+                                </h3>
+
+                                <p>
+                                    Velas artesanales para crear
+                                    ambientes cálidos y momentos especiales.
+                                </p>
+
+                                <a href="velas.html" class="btn-categoria">
+                                    Ver velas
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CATEGORÍA MANDALAS -->
+
+                    <div class="col-12 col-md-6 col-lg-3">
+
+                        <div class="categoria-card">
+
+                            <div class="categoria-imagen">
+
+                                <img
+                                    src="imagenes/Mandalas/Mandalitas.png"
+                                    alt="Mandala artesanal">
+
+                            </div>
+
+                            <div class="categoria-contenido">
+
+                                <h3>
+                                    <i class="bi bi-flower3"></i> Mandalas
+                                </h3>
+
+                                <p>
+                                    Diseños llenos de color y creatividad
+                                    para decorar tus espacios.
+                                </p>
+
+                                <a href="mandalas.html" class="btn-categoria">
+                                    Ver mandalas
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CATEGORÍA ILUMINACIÓN -->
+
+                    <div class="col-12 col-md-6 col-lg-3">
+
+                        <div class="categoria-card">
+
+                            <div class="categoria-imagen">
+
+                                <img
+                                    src="imagenes/Iluminacion/Velador_Bob_Esponja.jpg"
+                                    alt="Velador infantil artesanal">
+
+                            </div>
+
+                            <div class="categoria-contenido">
+
+                                <h3>
+                                    <i class="bi bi-lamp"></i> Iluminación
+                                </h3>
+
+                                <p>
+                                    Veladores infantiles y propuestas
+                                    especiales para iluminar tus espacios.
+                                </p>
+
+                                <a href="iluminacion.html" class="btn-categoria">
+                                    Ver iluminación
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CATEGORÍA ALMOHADONES -->
+
+                    <div class="col-12 col-md-6 col-lg-3">
+
+                        <div class="categoria-card">
+
+                            <div class="categoria-imagen">
+
+                                <img
+                                    src="imagenes/Almohadones/Almohadon_Buho.jpg"
+                                    alt="Almohadón artesanal">
+
+                            </div>
+
+                            <div class="categoria-contenido">
+
+                                <h3>
+                                    <i class="bi bi-house-heart"></i> Almohadones
+                                </h3>
+
+                                <p>
+                                    Almohadones con diseños originales
+                                    para darle calidez a tu hogar.
+                                </p>
+
+                                <a href="almohadones.html" class="btn-categoria">
+                                    Ver almohadones
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- INVITACIÓN FINAL -->
+
+            <section class="invitacion-artesana">
+
+                <div class="invitacion-contenido">
+
+                    <i class="bi bi-chat-heart"></i>
+
+                    <h2>¿Encontraste algo que te gustó?</h2>
+
+                    <p>
+                        Explorá nuestras categorías, elegí tus productos
+                        favoritos y agregalos al carrito para preparar tu pedido.
+                        ¡Estamos para ayudarte!
+                    </p>
+
+                    <a href="velas.html" class="btn-hero">
+                        Conocé nuestros productos
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </section>
+
+
+        </div>
 
     </main>
 
 
-    <!-- Pie de página con información general del emprendimiento -->
-    <footer class="py-4 mt-5 border-top">
+    <!-- =========================================
+         PIE DE PÁGINA
+    ========================================= -->
+
+    <footer class="footer-artesana">
 
         <div class="container">
 
             <div class="row align-items-center">
 
-
-                <!-- Información de Artesana -->
                 <div class="col-12 col-md-4 text-center text-md-start">
 
                     <h5>
-                        Artesana
+                        <i class="bi bi-flower1"></i> Artesana
                     </h5>
 
                     <p class="mb-0">
@@ -434,35 +1397,31 @@
                 </div>
 
 
-<!-- Redes sociales y medios de contacto -->
-<div class="col-12 col-md-4 text-center my-3 my-md-0">
+                <div class="col-12 col-md-4 text-center my-3 my-md-0 footer-redes">
 
-    <!-- Enlace directo a WhatsApp para consultas -->
-    <a 
-        href="https://wa.me/5491165076525"
-        target="_blank"
-        class="text-decoration-none me-3">
+                    <a
+                        href="https://wa.me/5491165076525"
+                        target="_blank"
+                        rel="noopener noreferrer">
 
-       <i class="bi bi-whatsapp icon-whatsapp"></i>
-WhatsApp
+                        <i class="bi bi-whatsapp icon-whatsapp"></i>
+                        WhatsApp
 
-    </a>
+                    </a>
 
-    <!-- Enlace al perfil de Instagram de Artesana -->
-    <a 
-        href="https://www.instagram.com/arte_sana_aromas/"
-        target="_blank"
-        class="text-decoration-none">
+                    <a
+                        href="https://www.instagram.com/arte_sana_aromas/"
+                        target="_blank"
+                        rel="noopener noreferrer">
 
-        <i class="bi bi-instagram icon-instagram"></i>
-Instagram
+                        <i class="bi bi-instagram icon-instagram"></i>
+                        Instagram
 
-    </a>
+                    </a>
 
-</div>
+                </div>
 
 
-                <!-- Derechos y autor del desarrollo -->
                 <div class="col-12 col-md-4 text-center text-md-end">
 
                     <p class="mb-1">
@@ -487,26 +1446,22 @@ Instagram
 
     </footer>
 
-    
-<!-- Bootstrap JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Configuración de la conexión con el Backend -->
-<script src="js/config.js"></script>
+    <!-- =========================================
+         ARCHIVOS JAVASCRIPT
+    ========================================= -->
 
-<!-- JavaScript encargado de cargar los productos -->
-<script src="js/productos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- JavaScript encargado de las funciones del carrito -->
-<script src="js/carrito.js"></script>
+    <script src="js/config.js"></script>
 
-<!-- JavaScript encargado de controlar la sesión del usuario -->
-<script src="js/sesion.js"></script>
+    <script src="js/productos.js"></script>
+
+    <script src="js/carrito.js"></script>
+
+    <script src="js/sesion.js"></script>
 
 
 </body>
 
 </html>
-
-
-
