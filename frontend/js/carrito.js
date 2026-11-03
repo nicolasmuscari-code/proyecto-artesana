@@ -467,9 +467,19 @@ if (botonWhatsapp) {
             }
 
 
-            // Armamos el mensaje.
+           // Recuperamos los datos del usuario que inició sesión.
+            const usuario = JSON.parse(
+                 localStorage.getItem("usuarioLogueado")
+            );
+
+            // Armamos el mensaje con los datos del cliente.
             let mensaje =
                 "Hola! Quiero consultar por el siguiente pedido:\n\n";
+
+              mensaje += "Cliente: " +
+            usuario.nombre + " " + usuario.apellido + "\n";
+
+            mensaje += "Email: " + usuario.email + "\n\n";
 
             mensaje += "Número de pedido: " + datos.pedido.id + "\n\n";
 

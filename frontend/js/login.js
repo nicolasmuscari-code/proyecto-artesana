@@ -53,11 +53,8 @@ if (formularioLogin) {
                 JSON.stringify(datos.usuario)
             );
 
-            // Informamos que el inicio de sesión fue correcto
-            alert("Inicio de sesión exitoso.");
-
-            // Redirigimos al inicio
-            window.location.href = "index.html";
+            /// Redirigimos al inicio sin mostrar un mensaje emergente
+                window.location.href = "index.html";
 
         } catch (error) {
 
