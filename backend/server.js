@@ -9,6 +9,11 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
+const { OAuth2Client } = require("google-auth-library");
+
+// Cliente para verificar los tokens de Google.
+const clienteGoogle = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const app = express();
 
@@ -198,6 +203,180 @@ app.post("/login", async (req, res) => {
 });
 
 // ============================================
+// INICIAR SESIÓN O REGISTRARSE CON GOOGLE
+// ============================================
+
+app.post("/auth/google", async (req, res) => {
+    const { credential } = req.body || {};
+
+    if (typeof credential !== "string" || !credential.trim()) {
+        return res.status(400).json({
+            error: "No se recibió la credencial de Google."
+        });
+    }
+
+    if (!process.env.GOOGLE_CLIENT_ID) {
+        console.error("Falta configurar GOOGLE_CLIENT_ID en .env");
+
+        return res.status(500).json({
+            error: "Error de configuración del inicio de sesión con Google."
+        });
+    }
+
+    if (!process.env.JWT_SECRET) {
+        console.error("Falta configurar JWT_SECRET en .env");
+
+        return res.status(500).json({
+            error: "Error de configuración del servidor."
+        });
+    }
+
+    try {
+        // Verificamos la firma, vigencia y destinatario del token de Google.
+        let datosGoogle;
+
+        try {
+            const ticket = await clienteGoogle.verifyIdToken({
+                idToken: credential,
+                audience: process.env.GOOGLE_CLIENT_ID
+            });
+
+            datosGoogle = ticket.getPayload();
+
+        } catch (errorGoogle) {
+            console.error(
+                "No se pudo verificar el token de Google:",
+                errorGoogle.message
+            );
+
+            return res.status(401).json({
+                error: "La credencial de Google no es válida o venció."
+            });
+        }
+
+        // Solo aceptamos cuentas con email verificado por Google.
+        if (
+            !datosGoogle ||
+            !datosGoogle.email ||
+            datosGoogle.email_verified !== true
+        ) {
+            return res.status(401).json({
+                error: "No se pudo verificar el email de la cuenta de Google."
+            });
+        }
+
+        const email = datosGoogle.email.trim().toLowerCase();
+
+        const nombreCompleto = (datosGoogle.name || "").trim();
+        const partesNombre = nombreCompleto.split(/\s+/).filter(Boolean);
+
+        const nombre =
+            datosGoogle.given_name || partesNombre[0] || "Usuario";
+
+        const apellido =
+            datosGoogle.family_name || partesNombre.slice(1).join(" ") || "Google";
+
+        // Buscamos si ya existe una cuenta con ese email.
+        let resultadoUsuario = await pool.query(
+            `SELECT id, nombre, apellido, email
+             FROM usuarios
+             WHERE LOWER(email) = LOWER($1)`,
+            [email]
+        );
+
+        let usuario;
+
+        if (resultadoUsuario.rows.length > 0) {
+
+            // El email verificado permite reconocer la cuenta existente.
+            usuario = resultadoUsuario.rows[0];
+
+        } else {
+
+            // La columna password de la tabla actual no admite valores nulos.
+            // Creamos un hash aleatorio que no se utiliza para iniciar sesión con Google.
+            const claveAleatoria = crypto.randomBytes(32).toString("hex");
+
+            const hashAleatorio = await bcrypt.hash(
+                claveAleatoria,
+                10
+            );
+
+            try {
+                resultadoUsuario = await pool.query(
+                    `INSERT INTO usuarios
+                        (nombre, apellido, email, password)
+                     VALUES ($1, $2, $3, $4)
+                     RETURNING id, nombre, apellido, email`,
+                    [
+                        nombre,
+                        apellido,
+                        email,
+                        hashAleatorio
+                    ]
+                );
+
+                usuario = resultadoUsuario.rows[0];
+
+            } catch (errorInsertar) {
+
+                // Si dos solicitudes crean la cuenta al mismo tiempo,
+                // recuperamos la cuenta que se haya insertado primero.
+                if (errorInsertar.code !== "23505") {
+                    throw errorInsertar;
+                }
+
+                resultadoUsuario = await pool.query(
+                    `SELECT id, nombre, apellido, email
+                     FROM usuarios
+                     WHERE LOWER(email) = LOWER($1)`,
+                    [email]
+                );
+
+                if (resultadoUsuario.rows.length === 0) {
+                    throw errorInsertar;
+                }
+
+                usuario = resultadoUsuario.rows[0];
+            }
+        }
+
+        // Generamos el mismo tipo de JWT que utiliza el login tradicional.
+        const token = jwt.sign(
+            {
+                id: usuario.id,
+                email: usuario.email
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "2h"
+            }
+        );
+
+        return res.status(200).json({
+            mensaje: "Inicio de sesión con Google exitoso.",
+            token,
+            usuario: {
+                id: usuario.id,
+                nombre: usuario.nombre,
+                apellido: usuario.apellido,
+                email: usuario.email
+            }
+        });
+
+    } catch (error) {
+        console.error(
+            "Error al procesar el inicio de sesión con Google:",
+            error.message
+        );
+
+        return res.status(500).json({
+            error: "No se pudo completar el inicio de sesión con Google."
+        });
+    }
+});
+
+// ============================================
 // CONSULTAR USUARIOS
 // RUTA DESHABILITADA POR SEGURIDAD
 // ============================================
@@ -323,6 +502,7 @@ app.post("/pedidos", verificarToken, async (req, res) => {
     try {
         // Usamos una transacción para registrar el pedido completo.
         conexion = await pool.connect();
+
         await conexion.query("BEGIN");
 
         const idsProductos = productosUnicos.map(
@@ -348,6 +528,7 @@ app.post("/pedidos", verificarToken, async (req, res) => {
         for (const productoCarrito of productosUnicos) {
             const idProducto = productoCarrito.id;
             const cantidad = productoCarrito.cantidad;
+
             const productoBD = productosBD.get(idProducto);
 
             if (!productoBD) {
@@ -421,6 +602,7 @@ app.post("/pedidos", verificarToken, async (req, res) => {
         });
 
     } catch (error) {
+
         if (conexion) {
             try {
                 await conexion.query("ROLLBACK");
@@ -446,6 +628,7 @@ app.post("/pedidos", verificarToken, async (req, res) => {
         });
 
     } finally {
+
         if (conexion) {
             conexion.release();
         }

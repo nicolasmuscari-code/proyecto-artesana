@@ -311,7 +311,6 @@
             .login-section {
                 min-height: 650px;
                 padding: 35px 15px;
-
                 background-position: center;
             }
 
@@ -459,7 +458,6 @@
                     <form id="form-login">
 
                         <!-- Correo electrónico -->
-
                         <div class="mb-3">
 
                             <label for="email" class="form-label">
@@ -475,9 +473,7 @@
 
                         </div>
 
-
                         <!-- Contraseña -->
-
                         <div class="mb-4">
 
                             <label for="password" class="form-label">
@@ -493,9 +489,7 @@
 
                         </div>
 
-
-                        <!-- Botón de ingreso -->
-
+                        <!-- Botón de ingreso tradicional -->
                         <div class="d-grid">
 
                             <button
@@ -510,6 +504,20 @@
                         </div>
 
                     </form>
+
+
+                    <!-- Separador entre los métodos de inicio de sesión -->
+
+                    <div class="text-center my-3">
+                        <span>O también podés ingresar con</span>
+                    </div>
+
+
+                    <!-- Espacio donde Google mostrará su botón -->
+
+                    <div class="d-flex justify-content-center my-3">
+                        <div id="google-button"></div>
+                    </div>
 
 
                     <!-- ENLACE AL REGISTRO -->
@@ -618,23 +626,21 @@
     ======================================== -->
 
     <!-- Bootstrap -->
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Configuración del Backend -->
+    <!-- Biblioteca de Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client"></script>
 
+    <!-- Configuración del Backend -->
     <script src="js/config.js"></script>
 
-    <!-- Inicio de sesión -->
-
+    <!-- Inicio de sesión tradicional y con Google -->
     <script src="js/login.js"></script>
 
     <!-- Control de sesión -->
-
     <script src="js/sesion.js"></script>
 
     <!-- Control del carrito -->
-
     <script src="js/carrito.js"></script>
 
 
