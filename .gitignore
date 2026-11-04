@@ -24,3 +24,5 @@ copias-de-seguridad/
 *.dump
 
 *.backup
+# Registros de tareas y documentación del proyecto
+Registro_tareas_Artesana_*.docx

@@ -14,107 +14,107 @@ const contenedorProductos = document.getElementById("contenedor-productos");
 // Identificamos la categoría que corresponde a esta página
 const categoriaPagina = document.body.dataset.categoria;
 
-// Consultamos la API para obtener los productos
-fetch(API_PRODUCTOS)
-    .then(function (respuesta) {
+// Verificamos si estamos en una página que muestra productos
+// Si no existen el contenedor o la categoría, no continuamos
+if (!contenedorProductos || !categoriaPagina) {
 
-        // Comprobamos si la respuesta fue correcta
-        if (!respuesta.ok) {
-            throw new Error("No se pudieron obtener los productos.");
-        }
+    console.log("Esta página no necesita cargar productos.");
 
-        // Convertimos la respuesta a formato JSON
-        return respuesta.json();
-    })
-    .then(function (productos) {
+} else {
 
-        // Mostramos en consola los productos recibidos
-        console.log("Productos recibidos desde el Backend:", productos);
+    // Consultamos la API para obtener los productos
+    fetch(API_PRODUCTOS)
+        .then(function (respuesta) {
 
-        // Verificamos que existan el contenedor y la categoría
-        if (!contenedorProductos || !categoriaPagina) {
-            console.error("No se encontró el contenedor o la categoría de la página.");
-            return;
-        }
+            // Comprobamos que la respuesta sea correcta
+            if (!respuesta.ok) {
+                throw new Error("No se pudieron obtener los productos.");
+            }
 
-        // Filtramos los productos de la categoría correspondiente
-        const productosCategoria = productos.filter(function (producto) {
-            return producto.categoria === categoriaPagina;
-        });
+            // Convertimos la respuesta a formato JSON
+            return respuesta.json();
+        })
+        .then(function (productos) {
 
-        // Si no hay productos, mostramos un mensaje
-        if (productosCategoria.length === 0) {
-            contenedorProductos.innerHTML = `
-                <div class="col-12 text-center">
-                    <p>No hay productos disponibles por el momento.</p>
-                </div>
-            `;
-            return;
-        }
+            // Mostramos los productos recibidos desde el Backend
+            console.log("Productos recibidos desde el Backend:", productos);
 
-        // Recorremos los productos recibidos desde la API
-        productosCategoria.forEach(function (producto) {
+            // Filtramos los productos de la categoría correspondiente
+            const productosCategoria = productos.filter(function (producto) {
+                return producto.categoria === categoriaPagina;
+            });
 
-            // Creamos una tarjeta para cada producto
-            contenedorProductos.innerHTML += `
-                <div class="col-12 col-md-6 col-lg-4">
+            // Si no hay productos, mostramos un mensaje
+            if (productosCategoria.length === 0) {
+                contenedorProductos.innerHTML = `
+                    <div class="col-12 text-center">
+                        <p>No hay productos disponibles por el momento.</p>
+                    </div>
+                `;
+                return;
+            }
 
-                    <div class="card">
+            // Recorremos los productos recibidos desde la API
+            productosCategoria.forEach(function (producto) {
 
-                        <img
-                            src="${producto.imagen}"
-                            class="card-img-top"
-                            alt="${producto.nombre}">
+                // Creamos una tarjeta para cada producto
+                contenedorProductos.innerHTML += `
+                    <div class="col-12 col-md-6 col-lg-4">
 
-                        <small class="text-muted text-center d-block mt-2">
-                            🔍 Hacé clic en la imagen para verla ampliada
-                        </small>
+                        <div class="card">
 
-                        <div class="card-body d-flex flex-column">
+                            <img
+                                src="${producto.imagen}"
+                                class="card-img-top"
+                                alt="${producto.nombre}">
 
-                            <h5 class="card-title">
-                                ${producto.nombre}
-                            </h5>
+                            <small class="text-muted text-center d-block mt-2">
+                                🔍 Hacé clic en la imagen para verla ampliada
+                            </small>
 
-                            <p class="card-text">
-                                ${producto.descripcion || ""}
-                            </p>
+                            <div class="card-body d-flex flex-column">
 
-                            <p class="card-text">
-                                $${Number(producto.precio).toLocaleString("es-AR")}
-                            </p>
+                                <h5 class="card-title">
+                                    ${producto.nombre}
+                                </h5>
 
-<button
-    class="btn btn-primary mt-auto"
-    data-id="${producto.id}"
-    data-producto="${producto.nombre}"
-    data-precio="${producto.precio}"
-    data-imagen="${producto.imagen}">
+                                <p class="card-text">
+                                    ${producto.descripcion || ""}
+                                </p>
 
-    🛒 Agregar al carrito
+                                <p class="card-text">
+                                    $${Number(producto.precio).toLocaleString("es-AR")}
+                                </p>
 
-</button>
+                                <button
+                                    class="btn btn-primary mt-auto"
+                                    data-id="${producto.id}"
+                                    data-producto="${producto.nombre}"
+                                    data-precio="${producto.precio}"
+                                    data-imagen="${producto.imagen}">
 
+                                    🛒 Agregar al carrito
+
+                                </button>
+
+                            </div>
 
                         </div>
 
                     </div>
+                `;
+            });
+        })
+        .catch(function (error) {
 
-                </div>
-            `;
-        });
-    })
-    .catch(function (error) {
+            // Informamos si hubo un problema al consultar la API
+            console.error("Error al cargar los productos:", error);
 
-        // Informamos si hubo un problema al consultar la API
-        console.error("Error al cargar los productos:", error);
-
-        if (contenedorProductos) {
             contenedorProductos.innerHTML = `
                 <div class="col-12 text-center">
                     <p>No se pudieron cargar los productos.</p>
                     <p>Verificá que el Backend esté funcionando.</p>
                 </div>
             `;
-        }
-    });
+        });
+}

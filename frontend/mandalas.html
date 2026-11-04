@@ -344,49 +344,69 @@
 
 <body data-categoria="Mandalas">
 
-    <!-- BARRA DE NAVEGACIÓN -->
+     <!-- =========================================
+         BARRA DE NAVEGACIÓN
+    ========================================= -->
 
-    <nav class="navbar navbar-expand-lg navbar-artesana">
-        <div class="container">
+<!-- =========================================
+     BARRA DE NAVEGACIÓN
+========================================= -->
 
-            <a class="navbar-brand" href="index.html">
-                <i class="bi bi-flower1"></i> Artesana
-            </a>
+<nav class="navbar navbar-expand-lg navbar-artesana">
 
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarArtesana"
-                aria-controls="navbarArtesana"
-                aria-expanded="false"
-                aria-label="Abrir menú">
+    <div class="container">
 
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <!-- LOGO -->
+        <a class="navbar-brand" href="index.html">
+            <i class="bi bi-flower1"></i> Artesana
+        </a>
 
-            <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
-                <div class="navbar-nav">
+        <!-- MENÚ DESPLEGABLE -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
 
-                    <a class="nav-link" href="velas.html">Velas</a>
-                    <a class="nav-link" href="mandalas.html">Mandalas</a>
-                    <a class="nav-link" href="iluminacion.html">Iluminación</a>
-                    <a class="nav-link" href="almohadones.html">Almohadones</a>
+            <div class="navbar-nav">
 
-                    <a class="nav-link" href="carrito.html">
-                        <i class="bi bi-cart3"></i>
-                        Carrito (<span id="contador-carrito">0</span>)
-                    </a>
+                <a class="nav-link" href="velas.html">Velas</a>
 
-                    <a class="nav-link" href="login.html" id="nav-login">
-                        <i class="bi bi-person-circle"></i>
-                        Ingresar
-                    </a>
+                <a class="nav-link" href="mandalas.html">Mandalas</a>
 
-                </div>
+                <a class="nav-link" href="iluminacion.html">Iluminación</a>
+
+                <a class="nav-link" href="almohadones.html">Almohadones</a>
+
+                <a class="nav-link" href="login.html" id="nav-login">
+                    <i class="bi bi-person-circle"></i>
+                    Ingresar
+                </a>
+
             </div>
+
         </div>
-    </nav>
+
+        <!-- CARRITO: FUERA DEL MENÚ HAMBURGUESA -->
+        <a class="nav-link ms-auto navbar-carrito" href="carrito.html">
+            <i class="bi bi-cart3"></i>
+            <span class="d-none d-sm-inline">Carrito</span>
+            (<span id="contador-carrito">0</span>)
+        </a>
+
+        <!-- BOTÓN HAMBURGUESA -->
+        <button
+            class="navbar-toggler ms-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarArtesana"
+            aria-controls="navbarArtesana"
+            aria-expanded="false"
+            aria-label="Abrir menú">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+    </div>
+
+</nav>
 
     <!-- CONTENIDO PRINCIPAL -->
 
