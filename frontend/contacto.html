@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contacto | Artesana</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <style>
+
+        /* =========================================
+           1. IDENTIDAD VISUAL DE ARTESANA
+        ========================================= */
+
+        :root {
+            --color-fondo: #f8f3eb;
+            --color-crema: #fffaf3;
+            --color-principal: #a65f45;
+            --color-principal-hover: #874a35;
+            --color-secundario: #d9a58b;
+            --color-texto: #49372f;
+            --color-suave: #8b776d;
+            --color-borde: #eadbce;
+            --color-oscuro: #49352d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        main {
+            flex: 1;
+        }
+
+
+        /* =========================================
+           2. BARRA DE NAVEGACIÓN
+        ========================================= */
+
+        .navbar-artesana {
+            background: rgba(255, 250, 243, 0.97);
+            border-bottom: 1px solid var(--color-borde);
+            box-shadow: 0 4px 18px rgba(73, 55, 47, 0.07);
+        }
+
+        .navbar-artesana .navbar-brand {
+            color: var(--color-principal);
+            font-size: 1.65rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar-artesana .navbar-brand i {
+            margin-right: 5px;
+        }
+
+        .navbar-artesana .nav-link {
+            color: var(--color-texto);
+            font-weight: 600;
+            margin-left: 5px;
+            transition: all 0.25s ease;
+        }
+
+        .navbar-artesana .nav-link:hover,
+        .navbar-artesana .nav-link.active {
+            color: var(--color-principal);
+        }
+
+        .navbar-toggler {
+            border-color: var(--color-secundario);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.2rem rgba(166, 95, 69, 0.20);
+        }
+
+
+        /* =========================================
+           3. TÍTULOS Y CONTENIDO
+        ========================================= */
+
+        .titulo-pagina {
+            color: var(--color-principal);
+            font-weight: bold;
+        }
+
+        .tarjeta-contacto {
+            background-color: var(--color-crema);
+            border: 1px solid var(--color-borde);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(73, 55, 47, 0.07);
+        }
+
+
+        /* =========================================
+           4. FORMULARIO
+        ========================================= */
+
+        .form-label {
+            font-weight: 600;
+            color: var(--color-texto);
+        }
+
+        .form-control,
+        .form-select {
+            border: 1px solid var(--color-borde);
+            border-radius: 9px;
+            padding: 11px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--color-secundario);
+            box-shadow: 0 0 0 0.2rem rgba(217, 165, 139, 0.2);
+        }
+
+        .btn-artesana {
+            background-color: var(--color-principal);
+            color: white;
+            border: none;
+            border-radius: 9px;
+            padding: 11px 25px;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-artesana:hover {
+            background-color: var(--color-principal-hover);
+            color: white;
+        }
+
+        .btn-artesana:disabled {
+            opacity: 0.7;
+        }
+
+
+        /* =========================================
+           5. INFORMACIÓN ADICIONAL
+        ========================================= */
+
+        .informacion-contacto {
+            background-color: #f1e5d9;
+            border-radius: 12px;
+            padding: 22px;
+            height: 100%;
+        }
+
+        .informacion-contacto i {
+            color: var(--color-principal);
+            font-size: 1.5rem;
+        }
+
+
+        /* =========================================
+           6. PIE DE PÁGINA ARTESANA
+        ========================================= */
+
+        .footer-artesana {
+            padding: 38px 0 25px;
+            background: var(--color-oscuro);
+            color: #f5e8dc;
+        }
+
+        .footer-artesana h5 {
+            font-family: Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-artesana p {
+            color: #e7d8cc;
+            font-size: 0.9rem;
+        }
+
+        .footer-artesana a {
+            color: #f5e8dc;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-artesana a:hover {
+            color: #e8b99e;
+        }
+
+        .icon-whatsapp {
+            color: #25D366;
+        }
+
+        .icon-instagram {
+            color: #E4405F;
+        }
+
+        .footer-redes a {
+            display: inline-block;
+            margin: 5px 8px;
+        }
+
+
+        /* =========================================
+           7. ADAPTACIÓN A CELULARES Y TABLETS
+        ========================================= */
+
+        @media (max-width: 768px) {
+
+            .tarjeta-contacto {
+                padding: 22px;
+            }
+
+            .footer-artesana {
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- =========================================
+         BARRA DE NAVEGACIÓN
+    ========================================= -->
+
+    <nav class="navbar navbar-expand-lg navbar-artesana">
+
+        <div class="container">
+
+            <!-- LOGO -->
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-flower1"></i> Artesana
+            </a>
+
+
+            <!-- BOTÓN HAMBURGUESA -->
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarArtesana"
+                aria-controls="navbarArtesana"
+                aria-expanded="false"
+                aria-label="Abrir menú">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <!-- MENÚ -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarArtesana">
+
+                <div class="navbar-nav">
+
+                    <a class="nav-link" href="index.html">Inicio</a>
+
+                    <a class="nav-link" href="velas.html">Velas</a>
+
+                    <a class="nav-link" href="mandalas.html">Mandalas</a>
+
+                    <a class="nav-link" href="iluminacion.html">Iluminación</a>
+
+                    <a class="nav-link" href="almohadones.html">Almohadones</a>
+
+                    <a class="nav-link active" href="contacto.html">Contacto</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL
+    ========================================= -->
+
+    <main class="container py-5">
+
+        <!-- TÍTULO -->
+        <div class="text-center mb-5">
+
+            <h1 class="titulo-pagina">
+                Contactate con nosotros
+            </h1>
+
+            <p class="mt-3">
+                Estamos para ayudarte. Dejanos tu consulta y nos pondremos
+                en contacto con vos.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4 justify-content-center">
+
+
+            <!-- =====================================
+                 FORMULARIO DE CONTACTO
+            ====================================== -->
+
+            <div class="col-lg-7">
+
+                <div class="tarjeta-contacto">
+
+                    <h3 class="titulo-pagina mb-4">
+                        Enviá tu consulta
+                    </h3>
+
+
+                    <form id="formulario-contacto">
+
+
+                        <!-- NOMBRE -->
+                        <div class="mb-3">
+
+                            <label for="nombre" class="form-label">
+                                Nombre y apellido
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="nombre"
+                                name="nombre"
+                                maxlength="100"
+                                required
+                                placeholder="Ingresá tu nombre completo">
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+                        <div class="mb-3">
+
+                            <label for="email" class="form-label">
+                                Correo electrónico
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                maxlength="150"
+                                required
+                                placeholder="ejemplo@correo.com">
+
+                        </div>
+
+
+                        <!-- MOTIVO -->
+                        <div class="mb-3">
+
+                            <label for="asunto" class="form-label">
+                                Motivo de consulta
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="asunto"
+                                name="asunto"
+                                required>
+
+                                <option value="">Seleccioná un motivo</option>
+
+                                <option value="Consulta por pedido minorista">
+                                    Consulta por pedido minorista
+                                </option>
+
+                                <option value="Consulta por pedido mayorista">
+                                    Consulta por pedido mayorista
+                                </option>
+
+                                <option value="Producto sin stock">
+                                    Consulta por producto sin stock
+                                </option>
+
+                                <option value="Otra consulta">
+                                    Otra consulta
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- MENSAJE -->
+                        <div class="mb-4">
+
+                            <label for="mensaje" class="form-label">
+                                Mensaje
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="mensaje"
+                                name="mensaje"
+                                rows="5"
+                                maxlength="5000"
+                                required
+                                placeholder="Escribí tu consulta..."></textarea>
+
+                        </div>
+
+
+                        <!-- MENSAJE DE RESPUESTA -->
+                        <div
+                            id="mensaje-respuesta"
+                            class="mb-3"
+                            role="status"
+                            aria-live="polite">
+                        </div>
+
+
+                        <!-- BOTÓN ENVIAR -->
+                        <button
+                            type="submit"
+                            class="btn btn-artesana"
+                            id="btn-enviar">
+
+                            <i class="bi bi-send me-2"></i>
+                            Enviar consulta
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 INFORMACIÓN ADICIONAL
+            ====================================== -->
+
+            <div class="col-lg-4">
+
+                <div class="informacion-contacto">
+
+                    <h4 class="titulo-pagina mb-4">
+                        ¿En qué podemos ayudarte?
+                    </h4>
+
+
+                    <!-- PEDIDOS MINORISTAS -->
+                    <div class="d-flex gap-3 mb-4">
+
+                        <i class="bi bi-box-seam"></i>
+
+                        <div>
+
+                            <strong>Pedidos minoristas</strong>
+
+                            <p class="mb-0">
+                                Consultanos por nuestros productos y tus pedidos.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PEDIDOS MAYORISTAS -->
+                    <div class="d-flex gap-3 mb-4">
+
+                        <i class="bi bi-shop"></i>
+
+                        <div>
+
+                            <strong>Pedidos mayoristas</strong>
+
+                            <p class="mb-0">
+                                Escribinos para consultar por compras mayoristas.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRODUCTOS SIN STOCK -->
+                    <div class="d-flex gap-3 mb-4">
+
+                        <i class="bi bi-box-seam"></i>
+
+                        <div>
+
+                            <strong>Productos sin stock</strong>
+
+                            <p class="mb-0">
+                                Consultanos por productos que actualmente no están disponibles.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OTRAS CONSULTAS -->
+                    <div class="d-flex gap-3">
+
+                        <i class="bi bi-chat-dots"></i>
+
+                        <div>
+
+                            <strong>Otras consultas</strong>
+
+                            <p class="mb-0">
+                                Estamos disponibles para responder tus preguntas.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         PIE DE PÁGINA ARTESANA
+    ========================================= -->
+
+    <footer class="footer-artesana">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+
+                <!-- IDENTIDAD DE ARTESANA -->
+                <div class="col-12 col-md-4 text-center text-md-start">
+
+                    <h5>
+                        <i class="bi bi-flower1"></i> Artesana
+                    </h5>
+
+                    <p class="mb-0">
+                        Velas, Mandalas, Iluminación y mucho más.
+                    </p>
+
+                </div>
+
+
+                <!-- REDES SOCIALES -->
+                <div class="col-12 col-md-4 text-center my-3 my-md-0 footer-redes">
+
+                    <a
+                        href="https://wa.me/5491165076525"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        <i class="bi bi-whatsapp icon-whatsapp"></i>
+                        WhatsApp
+
+                    </a>
+
+                    <a
+                        href="https://www.instagram.com/arte_sana_aromas/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        <i class="bi bi-instagram icon-instagram"></i>
+                        Instagram
+
+                    </a>
+
+                </div>
+
+
+                <!-- DERECHOS Y DESARROLLO -->
+                <div class="col-12 col-md-4 text-center text-md-end">
+
+                    <p class="mb-1">
+                        © 2026 Artesana — Todos los derechos reservados.
+                    </p>
+
+                    <p class="mb-0">
+
+                        Desarrollado por
+
+                        <a href="mailto:nicolasmuscari5@gmail.com">
+                            Nicolás Muscari
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         ARCHIVOS JAVASCRIPT
+    ========================================= -->
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Configuración de conexión con el backend -->
+    <script src="js/config.js"></script>
+
+
+    <script>
+
+        // ============================================
+        // ENVÍO DEL FORMULARIO DE CONTACTO
+        // ============================================
+
+        const formularioContacto = document.getElementById("formulario-contacto");
+
+        const mensajeRespuesta = document.getElementById("mensaje-respuesta");
+
+        const botonEnviar = document.getElementById("btn-enviar");
+
+
+        formularioContacto.addEventListener("submit", async function (evento) {
+
+            // Evitamos que el formulario recargue la página.
+            evento.preventDefault();
+
+
+            // Obtenemos los datos ingresados.
+            const datosConsulta = {
+
+                nombre: document.getElementById("nombre").value.trim(),
+
+                email: document.getElementById("email").value.trim(),
+
+                asunto: document.getElementById("asunto").value.trim(),
+
+                mensaje: document.getElementById("mensaje").value.trim()
+
+            };
+
+
+            // Deshabilitamos el botón mientras se procesa el envío.
+            botonEnviar.disabled = true;
+
+            botonEnviar.textContent = "Enviando...";
+
+            mensajeRespuesta.textContent = "";
+
+
+            try {
+
+                // Enviamos los datos al backend.
+                const respuesta = await fetch(`${API_BASE_URL}/contacto`, {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify(datosConsulta)
+
+                });
+
+
+                // Convertimos la respuesta del backend a JSON.
+                const resultado = await respuesta.json();
+
+
+                // Verificamos si ocurrió un error.
+                if (!respuesta.ok) {
+
+                    throw new Error(
+                        resultado.error || "No se pudo enviar la consulta."
+                    );
+
+                }
+
+
+                // Mostramos el mensaje de confirmación.
+                mensajeRespuesta.textContent =
+                    resultado.mensaje || "Tu consulta fue enviada correctamente.";
+
+                mensajeRespuesta.className = "alert alert-success";
+
+
+                // Limpiamos el formulario después del envío exitoso.
+                formularioContacto.reset();
+
+
+            } catch (error) {
+
+                // Mostramos el mensaje de error.
+                mensajeRespuesta.textContent =
+                    error.message || "Ocurrió un error al enviar la consulta.";
+
+                mensajeRespuesta.className = "alert alert-danger";
+
+
+            } finally {
+
+                // Volvemos a habilitar el botón.
+                botonEnviar.disabled = false;
+
+                botonEnviar.innerHTML =
+                    '<i class="bi bi-send me-2"></i>Enviar consulta';
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

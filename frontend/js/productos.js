@@ -3,6 +3,7 @@
     PROYECTO ARTESANA
     Carga los productos desde el Backend
     según la categoría de la página.
+    Oculta los productos que no tienen stock.
 */
 
 // Dirección de la API que devuelve los productos de PostgreSQL
@@ -15,7 +16,6 @@ const contenedorProductos = document.getElementById("contenedor-productos");
 const categoriaPagina = document.body.dataset.categoria;
 
 // Verificamos si estamos en una página que muestra productos
-// Si no existen el contenedor o la categoría, no continuamos
 if (!contenedorProductos || !categoriaPagina) {
 
     console.log("Esta página no necesita cargar productos.");
@@ -39,12 +39,15 @@ if (!contenedorProductos || !categoriaPagina) {
             // Mostramos los productos recibidos desde el Backend
             console.log("Productos recibidos desde el Backend:", productos);
 
-            // Filtramos los productos de la categoría correspondiente
+            // Filtramos por categoría y por disponibilidad de stock
             const productosCategoria = productos.filter(function (producto) {
-                return producto.categoria === categoriaPagina;
+                return (
+                    producto.categoria === categoriaPagina &&
+                    Number(producto.stock) > 0
+                );
             });
 
-            // Si no hay productos, mostramos un mensaje
+            // Si no hay productos disponibles, mostramos un mensaje
             if (productosCategoria.length === 0) {
                 contenedorProductos.innerHTML = `
                     <div class="col-12 text-center">
@@ -54,7 +57,7 @@ if (!contenedorProductos || !categoriaPagina) {
                 return;
             }
 
-            // Recorremos los productos recibidos desde la API
+            // Recorremos los productos disponibles
             productosCategoria.forEach(function (producto) {
 
                 // Creamos una tarjeta para cada producto
