@@ -22,6 +22,14 @@ if (!contenedorProductos || !categoriaPagina) {
 
 } else {
 
+    contenedorProductos.setAttribute("aria-busy", "true");
+    contenedorProductos.innerHTML = `
+        <div class="col-12 text-center py-5" role="status" aria-live="polite">
+            <div class="spinner-border text-secondary" aria-hidden="true"></div>
+            <p class="mt-3 mb-0">Cargando productos, puede tardar unos segundos...</p>
+        </div>
+    `;
+
     // Consultamos la API para obtener los productos
     fetch(API_PRODUCTOS)
         .then(function (respuesta) {
@@ -36,6 +44,8 @@ if (!contenedorProductos || !categoriaPagina) {
         })
         .then(function (productos) {
 
+            contenedorProductos.setAttribute("aria-busy", "false");
+
             // Mostramos los productos recibidos desde el Backend
             console.log("Productos recibidos desde el Backend:", productos);
 
@@ -46,6 +56,8 @@ if (!contenedorProductos || !categoriaPagina) {
                     Number(producto.stock) > 0
                 );
             });
+
+            contenedorProductos.innerHTML = "";
 
             // Si no hay productos disponibles, mostramos un mensaje
             if (productosCategoria.length === 0) {
@@ -109,6 +121,8 @@ if (!contenedorProductos || !categoriaPagina) {
             });
         })
         .catch(function (error) {
+
+            contenedorProductos.setAttribute("aria-busy", "false");
 
             // Informamos si hubo un problema al consultar la API
             console.error("Error al cargar los productos:", error);
